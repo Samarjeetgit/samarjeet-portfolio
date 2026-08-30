@@ -1,5 +1,4 @@
-﻿# Samarjeet_Portfolio2026
-# Samarjeet — Aspiring Cloud Infrastructure & Support Engineer Portfolio
+﻿# Samarjeet — Aspiring Cloud Engineer Portfolio
 
 Welcome to my personal portfolio repository.
 
