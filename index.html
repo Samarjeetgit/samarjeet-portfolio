@@ -1,1286 +1,2618 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Samarjeet — aspiring cloud infrastructure and support engineer. AWS, Linux, Python automation, networking, containers.">
-<title>Samarjeet — Cloud Infrastructure &amp; Support Engineer</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<meta name="description" content="Samarjeet — Computer Science student building toward Cloud Infrastructure and Support Engineering.">
+<meta name="theme-color" content="#10110f">
+
+<title>Samarjeet — Cloud Infrastructure / Systems</title>
 
 <style>
-/* ============================================================
-   TOKENS
-   Warm charcoal base (not cold near-black) + a 6-hue semantic
-   taxonomy. Each hue has one job and is reused everywhere that
-   job appears — skills matrix, diagram, tags, status labels.
-   It's a legend, not decoration.
-   ============================================================ */
-:root{
-    --bg:        #14120e;
-    --bg-raised: #1c1912;
-    --bg-sunk:   #0f0d0a;
-    --line:      #332d20;
-    --line-soft: #241f16;
-    --text:      #f3ede0;
-    --text-dim:  #a89e88;
-    --text-mute: #6e6553;
+/* =========================================================
+   SAMARJEET — PERSONAL ENGINEERING SITE
+   No framework. No dependencies. No build step.
+   ========================================================= */
 
-    /* semantic taxonomy — reused consistently, not randomly */
-    --cloud:    #e3a458;   /* AWS / cloud services */
-    --systems:  #5cb3a3;   /* Linux / runtime / networking */
-    --program:  #9a8ac9;   /* Python / logic / code */
-    --containers:#7fa3c9;  /* Docker / Kubernetes */
-    --data:     #8fb87a;   /* databases / storage */
-    --highlight:#d97f6e;   /* results, metrics, things to notice */
+:root {
+    --bg: #10110f;
+    --bg-soft: #151613;
+    --surface: #191a17;
 
-    --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-    --sans: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    --maxw: 900px;
+    --text: #e9e7df;
+    --muted: #94958e;
+    --faint: #5f625b;
+
+    --line: #2a2c27;
+    --line-strong: #3a3c36;
+
+    --blue: #7da7c4;
+    --green: #829d7d;
+    --amber: #b49a6c;
+    --red: #ad746a;
+
+    --sans: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont,
+            "Segoe UI", Helvetica, Arial, sans-serif;
+
+    --mono: "SFMono-Regular", Consolas, "Liberation Mono",
+            Menlo, monospace;
+
+    --max: 1180px;
 }
 
-*{ box-sizing:border-box; margin:0; padding:0; }
-html{ scroll-behavior:smooth; }
-
-@media (prefers-reduced-motion: reduce){
-    html{ scroll-behavior:auto; }
-    *{ animation-duration:.01ms !important; transition-duration:.01ms !important; }
+* {
+    box-sizing: border-box;
 }
 
-body{
-    background:var(--bg);
-    color:var(--text);
-    font-family:var(--sans);
-    font-size:16px;
-    line-height:1.65;
-    -webkit-font-smoothing:antialiased;
+html {
+    scroll-behavior: smooth;
 }
 
-a{ color:inherit; }
-::selection{ background:var(--cloud); color:#1a1204; }
-
-:focus-visible{
-    outline:2px solid var(--cloud);
-    outline-offset:3px;
-    border-radius:2px;
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
 }
 
-.wrap{
-    width:min(var(--maxw), 92%);
-    margin:0 auto;
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: .035;
+
+    background-image:
+        linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px);
+
+    background-size: 48px 48px;
+    mask-image: linear-gradient(to bottom, black, transparent 80%);
 }
 
-.mono{ font-family:var(--mono); }
-
-/* ============================================================
-   NAV
-   ============================================================ */
-header{
-    position:sticky;
-    top:0;
-    z-index:50;
-    background:rgba(20,18,14,.9);
-    backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--line-soft);
+a {
+    color: inherit;
+    text-decoration: none;
 }
 
-.nav{
-    height:60px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
+button {
+    font: inherit;
 }
 
-.brand{
-    font-family:var(--mono);
-    font-size:14px;
-    font-weight:500;
-    letter-spacing:.02em;
-    color:var(--text);
-}
-.brand em{
-    font-style:normal;
-    color:var(--cloud);
+::selection {
+    background: var(--blue);
+    color: #10110f;
 }
 
-.nav-links{
-    display:flex;
-    gap:28px;
-    font-size:13px;
-    color:var(--text-dim);
-}
-.nav-links a{ transition:color .15s ease; }
-.nav-links a:hover{ color:var(--cloud); }
-
-@media (max-width:720px){
-    .nav-links{ display:none; }
+:focus-visible {
+    outline: 1px solid var(--blue);
+    outline-offset: 4px;
 }
 
-/* ============================================================
-   LAYOUT PRIMITIVES
-   ============================================================ */
-section{
-    padding:88px 0;
-    border-bottom:1px solid var(--line-soft);
-}
-section:last-of-type{ border-bottom:none; }
-
-.label{
-    font-family:var(--mono);
-    font-size:11px;
-    letter-spacing:.14em;
-    text-transform:uppercase;
-    color:var(--cloud);
-    margin-bottom:14px;
+.container {
+    width: min(var(--max), calc(100% - 48px));
+    margin: 0 auto;
 }
 
-h2{
-    font-size:26px;
-    font-weight:600;
-    letter-spacing:-.01em;
-    margin-bottom:8px;
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    height: 68px;
+
+    border-bottom: 1px solid rgba(255,255,255,.07);
+
+    background: rgba(16,17,15,.88);
+    backdrop-filter: blur(14px);
 }
 
-.lede{
-    color:var(--text-dim);
-    max-width:56ch;
-    font-size:15px;
-    margin-bottom:36px;
+.header-inner {
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-/* ============================================================
+.wordmark {
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: .04em;
+    color: var(--text);
+}
+
+.wordmark span {
+    color: var(--blue);
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.nav a {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    transition: color .2s ease;
+}
+
+.nav a:hover {
+    color: var(--text);
+}
+
+.header-index {
+    color: var(--faint);
+    font-family: var(--mono);
+    font-size: 10px;
+}
+
+@media (max-width: 700px) {
+    .nav {
+        display: none;
+    }
+
+    .container {
+        width: min(100% - 32px, var(--max));
+    }
+}
+
+/* =========================================================
+   GENERAL
+   ========================================================= */
+
+section {
+    border-bottom: 1px solid var(--line);
+}
+
+.section {
+    padding: 120px 0;
+}
+
+.section-intro {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 60px;
+    margin-bottom: 60px;
+}
+
+.section-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--faint);
+    padding-top: 8px;
+}
+
+.section-title {
+    margin: 0;
+    max-width: 720px;
+
+    font-size: clamp(30px, 4vw, 48px);
+    line-height: 1.08;
+    font-weight: 500;
+    letter-spacing: -.035em;
+}
+
+.section-description {
+    max-width: 590px;
+    margin: 20px 0 0;
+
+    color: var(--muted);
+    font-size: 15px;
+}
+
+/* =========================================================
    HERO
-   ============================================================ */
-.hero{
-    padding-top:96px;
-    padding-bottom:96px;
+   ========================================================= */
+
+.hero {
+    min-height: calc(100vh - 68px);
+
+    display: flex;
+    align-items: center;
+
+    border-bottom: 1px solid var(--line);
 }
 
-.hero-tag{
-    font-family:var(--mono);
-    font-size:12px;
-    color:var(--text-dim);
-    letter-spacing:.06em;
-    margin-bottom:22px;
-    display:flex;
-    flex-wrap:wrap;
-    gap:14px;
-}
-.hero-tag span{ display:inline-flex; align-items:center; gap:6px; }
-.hero-tag .dot{ width:6px; height:6px; border-radius:50%; display:inline-block; }
-
-.hero h1{
-    font-size:clamp(30px, 4.6vw, 44px);
-    line-height:1.22;
-    font-weight:600;
-    letter-spacing:-.015em;
-    max-width:16ch;
-    margin-bottom:22px;
+.hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(250px, .65fr);
+    gap: 90px;
+    align-items: end;
 }
 
-.hero-role{
-    font-family:var(--mono);
-    font-size:14px;
-    color:var(--text-dim);
-    margin-bottom:22px;
-}
-.hero-role strong{ color:var(--text); font-weight:500; }
+.hero-kicker {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 
-.hero-desc{
-    color:var(--text-dim);
-    max-width:58ch;
-    font-size:15.5px;
-    margin-bottom:34px;
+    margin-bottom: 30px;
+
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
 }
 
-.hero-actions{
-    display:flex;
-    flex-wrap:wrap;
-    gap:12px;
+.hero-kicker::before {
+    content: "";
+    width: 24px;
+    height: 1px;
+    background: var(--blue);
 }
 
-.btn{
-    display:inline-flex;
-    align-items:center;
-    gap:6px;
-    padding:10px 16px;
-    border-radius:6px;
-    font-size:13.5px;
-    font-weight:500;
-    border:1px solid var(--line);
-    transition:border-color .15s ease, background .15s ease, transform .15s ease;
-}
-.btn:hover{ transform:translateY(-1px); }
+.hero-title {
+    max-width: 900px;
 
-.btn-primary{
-    background:var(--cloud);
-    color:#1a1204;
-    border-color:var(--cloud);
-}
-.btn-primary:hover{ background:#edb570; }
+    margin: 0;
 
-.btn-ghost{
-    background:transparent;
-    color:var(--text);
-}
-.btn-ghost:hover{ border-color:var(--cloud); color:var(--cloud); }
-
-/* ============================================================
-   ARCHITECTURE DIAGRAM (signature element)
-   Nodes are colored by the same taxonomy used in the skills
-   matrix: amber = AWS/cloud, violet = code/logic, teal = runtime.
-   ============================================================ */
-.diagram-frame{
-    margin-top:64px;
-    border:1px solid var(--line);
-    border-radius:10px;
-    background:var(--bg-raised);
-    overflow:hidden;
+    font-size: clamp(52px, 8vw, 104px);
+    line-height: .93;
+    font-weight: 500;
+    letter-spacing: -.065em;
 }
 
-.diagram-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:12px 18px;
-    border-bottom:1px solid var(--line-soft);
-    font-family:var(--mono);
-    font-size:11px;
-    color:var(--text-mute);
-    letter-spacing:.04em;
+.hero-title em {
+    color: var(--muted);
+    font-style: normal;
 }
 
-.diagram-body{
-    padding:36px 20px 30px;
+.hero-copy {
+    max-width: 580px;
+
+    margin: 34px 0 0;
+
+    color: var(--muted);
+    font-size: 17px;
+    line-height: 1.7;
 }
 
-.diagram-svg{
-    width:100%;
-    height:auto;
-    display:block;
+.hero-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+
+    margin-top: 34px;
 }
 
-.node-box{
-    fill:var(--bg-sunk);
-    stroke:var(--line);
-    stroke-width:1;
-    transition:stroke .2s ease, fill .2s ease;
-}
-.node text{
-    fill:var(--text-dim);
-    font-family:var(--mono);
-    font-size:12px;
-}
-.node .node-sub{
-    fill:var(--text-mute);
-    font-size:9.5px;
-}
-.node .node-tick{
-    transition:opacity .2s ease;
-}
-.node:hover .node-box{ fill:#241f16; }
-.node:hover text{ fill:var(--text); }
-.node.cloud:hover .node-box{ stroke:var(--cloud); }
-.node.program:hover .node-box{ stroke:var(--program); }
-.node.systems:hover .node-box{ stroke:var(--systems); }
-.node.containers:hover .node-box{ stroke:var(--containers); }
+.button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
 
-.edge{
-    stroke:var(--line);
-    stroke-width:1;
-    fill:none;
+    padding: 10px 15px;
+
+    border: 1px solid var(--line-strong);
+
+    font-family: var(--mono);
+    font-size: 11px;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease,
+        transform .2s ease;
 }
 
-/* legend under diagram */
-.diagram-legend{
-    display:flex;
-    flex-wrap:wrap;
-    gap:16px;
-    padding:14px 20px 20px;
-    font-family:var(--mono);
-    font-size:11px;
-    color:var(--text-mute);
-    border-top:1px solid var(--line-soft);
+.button:hover {
+    border-color: var(--blue);
+    background: rgba(125,167,196,.07);
+    transform: translateY(-1px);
 }
-.diagram-legend span{ display:inline-flex; align-items:center; gap:6px; }
-.diagram-legend .dot{ width:7px; height:7px; border-radius:50%; display:inline-block; }
 
-/* ============================================================
+.button.primary {
+    background: var(--text);
+    color: var(--bg);
+    border-color: var(--text);
+}
+
+.button.primary:hover {
+    background: var(--blue);
+    border-color: var(--blue);
+}
+
+.hero-side {
+    border-left: 1px solid var(--line);
+
+    padding-left: 30px;
+    padding-bottom: 6px;
+}
+
+.hero-side-label {
+    margin-bottom: 18px;
+
+    color: var(--faint);
+
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+.hero-side-item {
+    display: flex;
+    justify-content: space-between;
+
+    padding: 10px 0;
+
+    border-bottom: 1px solid var(--line);
+
+    font-family: var(--mono);
+    font-size: 11px;
+}
+
+.hero-side-item span:first-child {
+    color: var(--muted);
+}
+
+.hero-side-item span:last-child {
+    color: var(--text);
+}
+
+@media (max-width: 850px) {
+    .hero {
+        min-height: auto;
+        padding: 100px 0;
+    }
+
+    .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 60px;
+    }
+
+    .hero-side {
+        max-width: 480px;
+    }
+}
+
+@media (max-width: 500px) {
+    .hero-title {
+        font-size: clamp(46px, 15vw, 72px);
+    }
+
+    .hero-copy {
+        font-size: 15px;
+    }
+}
+
+/* =========================================================
    ABOUT
-   ============================================================ */
-.about-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:40px;
-}
-.about-body p{
-    color:var(--text-dim);
-    font-size:15px;
-    margin-bottom:14px;
-    max-width:52ch;
-}
-.about-body strong{ color:var(--text); font-weight:500; }
+   ========================================================= */
 
-.interest-list{
-    list-style:none;
-    font-family:var(--mono);
-    font-size:13px;
-    color:var(--text-dim);
-}
-.interest-list li{
-    padding:9px 0;
-    border-bottom:1px solid var(--line-soft);
-    display:flex;
-    gap:10px;
-    align-items:center;
-}
-.interest-list .dot{
-    width:6px; height:6px; border-radius:50%; display:inline-block;
-}
-.interest-list li:last-child{ border-bottom:none; }
-
-@media (max-width:720px){
-    .about-grid{ grid-template-columns:1fr; gap:28px; }
+.about-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
 }
 
-/* ============================================================
-   SKILLS MATRIX
-   Each row's key label carries a color dot from the taxonomy —
-   the same colors reappear in the diagram and in job tags below,
-   so the palette functions as a key, not a rainbow.
-   ============================================================ */
-.matrix{
-    border:1px solid var(--line);
-    border-radius:8px;
-    overflow:hidden;
-}
-.matrix-row{
-    display:grid;
-    grid-template-columns:170px 1fr;
-    border-bottom:1px solid var(--line-soft);
-}
-.matrix-row:last-child{ border-bottom:none; }
-
-.matrix-key{
-    padding:16px 18px;
-    font-size:13px;
-    color:var(--text-dim);
-    border-right:1px solid var(--line-soft);
-    display:flex;
-    align-items:center;
-    gap:9px;
-}
-.matrix-key .dot{
-    width:7px; height:7px; border-radius:50%; flex:none;
+.about-text {
+    max-width: 620px;
 }
 
-.matrix-val{
-    padding:16px 18px;
-    font-family:var(--mono);
-    font-size:13px;
-    color:var(--text);
-    display:flex;
-    align-items:center;
-    flex-wrap:wrap;
-    gap:4px 10px;
-}
-.matrix-val .sep{ color:var(--text-mute); }
+.about-text p {
+    margin: 0 0 22px;
 
-@media (max-width:600px){
-    .matrix-row{ grid-template-columns:1fr; }
-    .matrix-key{ border-right:none; border-bottom:1px solid var(--line-soft); padding-bottom:8px; }
+    color: var(--muted);
+    font-size: 17px;
+    line-height: 1.8;
 }
 
-/* ============================================================
-   EXPERIENCE
-   ============================================================ */
-.job{
-    display:grid;
-    grid-template-columns:150px 1fr;
-    gap:24px;
-    padding:28px 0;
-    border-bottom:1px solid var(--line-soft);
-}
-.job:last-child{ border-bottom:none; }
-
-.job-meta{
-    font-family:var(--mono);
-    font-size:12px;
-    color:var(--text-mute);
-    line-height:1.7;
+.about-text strong {
+    color: var(--text);
+    font-weight: 500;
 }
 
-.job-title{
-    font-size:16px;
-    font-weight:600;
-    margin-bottom:4px;
-}
-.job-org{
-    color:var(--cloud);
-    font-weight:500;
-}
-.job-stack{
-    font-family:var(--mono);
-    font-size:12px;
-    color:var(--text-mute);
-    margin:8px 0 12px;
-}
-.job-desc{
-    color:var(--text-dim);
-    font-size:14.5px;
-    max-width:58ch;
-    margin-bottom:12px;
-}
-.job-list{
-    list-style:none;
-    font-family:var(--mono);
-    font-size:12.5px;
-    color:var(--text-dim);
-    margin-bottom:12px;
-}
-.job-list li{ padding:3px 0; }
-.job-list li::before{ content:"– "; color:var(--text-mute); }
+.about-note {
+    border-top: 1px solid var(--line);
 
-.result-chip{
-    display:inline-block;
-    font-family:var(--mono);
-    font-size:12px;
-    color:var(--highlight);
-    border:1px solid #5c3b32;
-    background:rgba(217,127,110,.08);
-    padding:5px 10px;
-    border-radius:5px;
+    padding-top: 20px;
+
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--faint);
 }
 
-@media (max-width:600px){
-    .job{ grid-template-columns:1fr; gap:8px; }
+.interests {
+    align-self: start;
 }
 
-/* ============================================================
-   FEATURED PROJECT (case study)
-   ============================================================ */
-.case{
-    border:1px solid var(--line);
-    border-radius:10px;
-    background:var(--bg-raised);
-    padding:34px;
+.interests-heading {
+    margin-bottom: 20px;
+
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .12em;
+    color: var(--faint);
+    text-transform: uppercase;
 }
 
-.case-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-    gap:20px;
-    flex-wrap:wrap;
-    margin-bottom:18px;
+.interest {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 14px 0;
+
+    border-bottom: 1px solid var(--line);
+
+    font-size: 14px;
 }
 
-.case h3{
-    font-size:20px;
-    font-weight:600;
-    margin-bottom:6px;
+.interest span {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--faint);
 }
 
-.case-stack{
-    font-family:var(--mono);
-    font-size:12px;
-    color:var(--text-mute);
+@media (max-width: 800px) {
+    .about-layout {
+        grid-template-columns: 1fr;
+        gap: 55px;
+    }
 }
 
-.case-sections{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:24px 32px;
-    margin-top:24px;
+/* =========================================================
+   SKILLS — INDEX STYLE
+   ========================================================= */
+
+.skill-index {
+    border-top: 1px solid var(--line);
 }
 
-.case-block h4{
-    font-family:var(--mono);
-    font-size:11px;
-    letter-spacing:.1em;
-    text-transform:uppercase;
-    color:var(--program);
-    margin-bottom:8px;
-}
-.case-block p, .case-block li{
-    color:var(--text-dim);
-    font-size:14px;
-}
-.case-block ul{ list-style:none; }
-.case-block li{ padding:3px 0; }
-.case-block li::before{ content:"– "; color:var(--text-mute); }
+.skill-row {
+    display: grid;
+    grid-template-columns: 220px 1fr auto;
+    gap: 30px;
+    align-items: center;
 
-.case-arch{
-    grid-column:1 / -1;
-    margin-top:6px;
-    padding:20px;
-    background:var(--bg-sunk);
-    border:1px solid var(--line-soft);
-    border-radius:8px;
-    font-family:var(--mono);
-    font-size:12.5px;
-    color:var(--text-dim);
-    line-height:2;
-    overflow-x:auto;
-    white-space:pre;
+    min-height: 72px;
+
+    border-bottom: 1px solid var(--line);
 }
 
-.case-result{
-    grid-column:1 / -1;
-    display:flex;
-    gap:24px;
-    flex-wrap:wrap;
-    margin-top:6px;
-    padding-top:20px;
-    border-top:1px solid var(--line-soft);
-}
-.result-stat{
-    font-family:var(--mono);
-}
-.result-stat .num{
-    font-size:22px;
-    color:var(--highlight);
-    font-weight:600;
-    display:block;
-}
-.result-stat .cap{
-    font-size:11.5px;
-    color:var(--text-mute);
-}
-.case-note{
-    font-size:12.5px;
-    color:var(--text-mute);
-    margin-top:14px;
-    font-style:italic;
+.skill-category {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
 }
 
-@media (max-width:700px){
-    .case-sections{ grid-template-columns:1fr; }
+.skill-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 22px;
+
+    font-size: 14px;
 }
 
-/* ============================================================
+.skill-items span {
+    position: relative;
+}
+
+.skill-items span::after {
+    content: "·";
+
+    position: absolute;
+    right: -14px;
+
+    color: var(--faint);
+}
+
+.skill-items span:last-child::after {
+    display: none;
+}
+
+.skill-level {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--faint);
+    text-transform: uppercase;
+}
+
+@media (max-width: 700px) {
+    .skill-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        padding: 18px 0;
+    }
+
+    .skill-level {
+        display: none;
+    }
+}
+
+/* =========================================================
+   FEATURED PROJECT
+   ========================================================= */
+
+.project-feature {
+    border-top: 1px solid var(--line);
+}
+
+.project-header {
+    display: grid;
+    grid-template-columns: 1fr 250px;
+    gap: 60px;
+
+    padding: 42px 0;
+
+    border-bottom: 1px solid var(--line);
+}
+
+.project-index {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--blue);
+    margin-bottom: 18px;
+}
+
+.project-title {
+    margin: 0;
+
+    max-width: 800px;
+
+    font-size: clamp(32px, 5vw, 60px);
+    line-height: 1;
+    font-weight: 500;
+    letter-spacing: -.045em;
+}
+
+.project-summary {
+    margin-top: 20px;
+
+    max-width: 650px;
+
+    color: var(--muted);
+    font-size: 15px;
+}
+
+.project-meta {
+    align-self: end;
+}
+
+.project-meta-label {
+    margin-bottom: 8px;
+
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--faint);
+    text-transform: uppercase;
+    letter-spacing: .1em;
+}
+
+.project-stack {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text);
+    line-height: 1.9;
+}
+
+/* Architecture */
+
+.architecture {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    border-bottom: 1px solid var(--line);
+}
+
+.architecture-visual {
+    min-height: 430px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 50px;
+
+    border-right: 1px solid var(--line);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(125,167,196,.035),
+            transparent 50%
+        );
+}
+
+.pipeline {
+    width: 100%;
+    max-width: 400px;
+}
+
+.pipeline-node {
+    position: relative;
+
+    display: grid;
+    grid-template-columns: 28px 1fr auto;
+    gap: 14px;
+    align-items: center;
+
+    min-height: 58px;
+
+    border: 1px solid var(--line-strong);
+
+    padding: 0 15px;
+
+    background: var(--bg-soft);
+
+    transition:
+        border-color .2s ease,
+        background .2s ease;
+}
+
+.pipeline-node:hover {
+    border-color: var(--blue);
+    background: #1b1d1a;
+}
+
+.pipeline-node::before {
+    content: "";
+
+    width: 7px;
+    height: 7px;
+
+    border: 1px solid var(--blue);
+}
+
+.pipeline-node:nth-child(2)::before {
+    border-color: var(--amber);
+}
+
+.pipeline-node:nth-child(3)::before {
+    border-color: var(--green);
+}
+
+.pipeline-node:nth-child(4)::before {
+    border-color: var(--blue);
+}
+
+.pipeline-node:nth-child(5)::before {
+    border-color: var(--green);
+}
+
+.pipeline-name {
+    font-family: var(--mono);
+    font-size: 11px;
+}
+
+.pipeline-type {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--faint);
+}
+
+.pipeline-arrow {
+    height: 30px;
+    width: 1px;
+
+    margin-left: 13px;
+
+    background: var(--line-strong);
+}
+
+/* Case study */
+
+.case-study {
+    padding: 50px;
+}
+
+.case-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 45px;
+}
+
+.case-block h3 {
+    margin: 0 0 13px;
+
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+
+    color: var(--blue);
+}
+
+.case-block p {
+    margin: 0;
+
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.75;
+}
+
+.engineering-decisions {
+    margin-top: 55px;
+
+    border-top: 1px solid var(--line);
+}
+
+.decision {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+
+    padding: 18px 0;
+
+    border-bottom: 1px solid var(--line);
+}
+
+.decision-name {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text);
+}
+
+.decision-reason {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.result-bar {
+    display: flex;
+    align-items: stretch;
+
+    margin-top: 50px;
+
+    border: 1px solid var(--line);
+}
+
+.result {
+    flex: 1;
+
+    padding: 25px;
+
+    border-right: 1px solid var(--line);
+}
+
+.result:last-child {
+    border-right: none;
+}
+
+.result-number {
+    display: block;
+
+    font-family: var(--mono);
+    font-size: 27px;
+
+    color: var(--text);
+}
+
+.result-label {
+    display: block;
+
+    margin-top: 5px;
+
+    font-family: var(--mono);
+    font-size: 9px;
+
+    color: var(--faint);
+    text-transform: uppercase;
+}
+
+.project-note {
+    margin-top: 15px;
+
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--faint);
+}
+
+@media (max-width: 850px) {
+    .project-header {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .architecture {
+        grid-template-columns: 1fr;
+    }
+
+    .architecture-visual {
+        border-right: none;
+        border-bottom: 1px solid var(--line);
+    }
+
+    .case-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+}
+
+@media (max-width: 600px) {
+    .case-study,
+    .architecture-visual {
+        padding: 30px 20px;
+    }
+
+    .decision {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .result-bar {
+        flex-direction: column;
+    }
+
+    .result {
+        border-right: none;
+        border-bottom: 1px solid var(--line);
+    }
+
+    .result:last-child {
+        border-bottom: none;
+    }
+}
+
+/* =========================================================
    SECOND PROJECT
-   ============================================================ */
-.project-card{
-    border:1px solid var(--line);
-    border-radius:10px;
-    padding:30px;
-}
-.project-card h3{
-    font-size:18px;
-    font-weight:600;
-    margin-bottom:6px;
-}
-.project-card .case-stack{ margin-bottom:16px; }
-.project-card p{
-    color:var(--text-dim);
-    font-size:14.5px;
-    max-width:60ch;
-    margin-bottom:18px;
-}
-.flow{
-    font-family:var(--mono);
-    font-size:12.5px;
-    color:var(--text-dim);
-    background:var(--bg-sunk);
-    border:1px solid var(--line-soft);
-    border-radius:8px;
-    padding:18px;
-    line-height:2;
-}
-.flow .arrow{ color:var(--systems); }
+   ========================================================= */
 
-.tag-row{
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-    margin-top:16px;
-}
-.tag{
-    font-family:var(--mono);
-    font-size:11.5px;
-    color:var(--text-dim);
-    border:1px solid var(--line-soft);
-    padding:4px 9px;
-    border-radius:5px;
+.secondary-project {
+    margin-top: 90px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
 }
 
-/* ============================================================
-   PYTHON PROJECTS (expandable list)
-   ============================================================ */
-.py-list{ border:1px solid var(--line); border-radius:8px; overflow:hidden; }
-.py-item{ border-bottom:1px solid var(--line-soft); }
-.py-item:last-child{ border-bottom:none; }
-
-.py-item summary{
-    list-style:none;
-    cursor:pointer;
-    padding:16px 18px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    font-size:14px;
-    color:var(--text);
-    font-family:var(--mono);
-}
-.py-item summary::-webkit-details-marker{ display:none; }
-.py-item summary::after{
-    content:"+";
-    color:var(--text-mute);
-    font-size:16px;
-    transition:transform .15s ease;
-}
-.py-item[open] summary::after{ content:"–"; color:var(--program); }
-.py-item summary:hover{ color:var(--program); }
-
-.py-item .py-body{
-    padding:0 18px 18px;
-    color:var(--text-dim);
-    font-size:13.5px;
-    max-width:60ch;
+.secondary-copy {
+    padding: 45px 45px 45px 0;
 }
 
-/* ============================================================
-   TROUBLESHOOTING FLOW
-   ============================================================ */
-.tshoot{
-    display:flex;
-    flex-wrap:wrap;
-    gap:0;
-    font-family:var(--mono);
-    font-size:12.5px;
-    border:1px solid var(--line);
-    border-radius:8px;
-    overflow:hidden;
-}
-.tshoot-step{
-    flex:1 1 130px;
-    padding:18px 14px;
-    text-align:center;
-    border-right:1px solid var(--line-soft);
-    color:var(--text-dim);
-}
-.tshoot-step:last-child{ border-right:none; }
-.tshoot-step .n{
-    display:block;
-    color:var(--systems);
-    font-size:11px;
-    margin-bottom:6px;
+.secondary-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--green);
+    text-transform: uppercase;
+    letter-spacing: .1em;
 }
 
-@media (max-width:700px){
-    .tshoot-step{ border-right:none; border-bottom:1px solid var(--line-soft); flex:1 1 45%; }
+.secondary-title {
+    margin: 18px 0;
+
+    font-size: 32px;
+    line-height: 1.05;
+    font-weight: 500;
+    letter-spacing: -.035em;
 }
 
-/* ============================================================
+.secondary-copy p {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.secondary-tech {
+    margin-top: 25px;
+
+    font-family: var(--mono);
+    font-size: 10px;
+    line-height: 2;
+    color: var(--faint);
+}
+
+.telemetry {
+    min-height: 330px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 35px;
+
+    border-left: 1px solid var(--line);
+
+    background: var(--bg-soft);
+}
+
+.telemetry-diagram {
+    width: 100%;
+    max-width: 430px;
+}
+
+.telemetry-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+}
+
+.telemetry-node {
+    padding: 10px 12px;
+
+    border: 1px solid var(--line-strong);
+
+    font-family: var(--mono);
+    font-size: 9px;
+
+    color: var(--muted);
+}
+
+.telemetry-line {
+    width: 25px;
+    height: 1px;
+    background: var(--line-strong);
+}
+
+.telemetry-caption {
+    margin-top: 22px;
+
+    text-align: center;
+
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--faint);
+}
+
+@media (max-width: 800px) {
+    .secondary-project {
+        grid-template-columns: 1fr;
+    }
+
+    .secondary-copy {
+        padding: 35px 0;
+    }
+
+    .telemetry {
+        border-left: none;
+        border-top: 1px solid var(--line);
+    }
+}
+
+/* =========================================================
+   EXPERIENCE — WORK LOG
+   ========================================================= */
+
+.work-log {
+    border-top: 1px solid var(--line);
+}
+
+.work-entry {
+    display: grid;
+    grid-template-columns: 120px 190px 1fr;
+    gap: 30px;
+
+    padding: 32px 0;
+
+    border-bottom: 1px solid var(--line);
+}
+
+.work-year {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--faint);
+}
+
+.work-company {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--blue);
+}
+
+.work-role {
+    margin-bottom: 8px;
+
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.work-description {
+    max-width: 650px;
+
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.work-tech {
+    margin-top: 13px;
+
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--faint);
+}
+
+@media (max-width: 700px) {
+    .work-entry {
+        grid-template-columns: 1fr;
+        gap: 7px;
+    }
+
+    .work-year {
+        margin-bottom: 5px;
+    }
+}
+
+/* =========================================================
+   TROUBLESHOOTING
+   ========================================================= */
+
+.troubleshooting {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 70px;
+}
+
+.troubleshooting-copy p {
+    color: var(--muted);
+    font-size: 15px;
+}
+
+.debug-flow {
+    border-top: 1px solid var(--line);
+}
+
+.debug-step {
+    display: grid;
+    grid-template-columns: 45px 150px 1fr;
+    gap: 20px;
+    align-items: center;
+
+    padding: 17px 0;
+
+    border-bottom: 1px solid var(--line);
+}
+
+.debug-number {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--blue);
+}
+
+.debug-name {
+    font-family: var(--mono);
+    font-size: 11px;
+}
+
+.debug-description {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+@media (max-width: 800px) {
+    .troubleshooting {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+}
+
+@media (max-width: 550px) {
+    .debug-step {
+        grid-template-columns: 30px 1fr;
+    }
+
+    .debug-description {
+        grid-column: 2;
+    }
+}
+
+/* =========================================================
    LEARNING
-   Status color is its own small taxonomy: building = most
-   active (amber), practicing = steady (teal), learning = early
-   (slate/containers hue). Consistent, not arbitrary.
-   ============================================================ */
-.learn-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fill, minmax(200px, 1fr));
-    gap:1px;
-    background:var(--line-soft);
-    border:1px solid var(--line);
-    border-radius:8px;
-    overflow:hidden;
-}
-.learn-item{
-    background:var(--bg);
-    padding:18px;
-    border-top:2px solid transparent;
-}
-.learn-item .name{
-    font-size:14px;
-    margin-bottom:6px;
-}
-.learn-item .status{
-    font-family:var(--mono);
-    font-size:11px;
-    text-transform:uppercase;
-    letter-spacing:.06em;
-}
-.learn-item.st-building{ border-top-color:var(--cloud); }
-.learn-item.st-building .status{ color:var(--cloud); }
-.learn-item.st-practicing{ border-top-color:var(--systems); }
-.learn-item.st-practicing .status{ color:var(--systems); }
-.learn-item.st-learning{ border-top-color:var(--containers); }
-.learn-item.st-learning .status{ color:var(--containers); }
+   ========================================================= */
 
-/* ============================================================
+.learning-list {
+    border-top: 1px solid var(--line);
+}
+
+.learning-row {
+    display: grid;
+    grid-template-columns: 1fr 150px;
+
+    padding: 18px 0;
+
+    border-bottom: 1px solid var(--line);
+}
+
+.learning-name {
+    font-size: 15px;
+}
+
+.learning-status {
+    text-align: right;
+
+    font-family: var(--mono);
+    font-size: 9px;
+
+    text-transform: uppercase;
+}
+
+.learning-status.building {
+    color: var(--amber);
+}
+
+.learning-status.practicing {
+    color: var(--green);
+}
+
+.learning-status.learning {
+    color: var(--blue);
+}
+
+/* =========================================================
+   PYTHON PROJECTS
+   ========================================================= */
+
+.small-projects {
+    margin-top: 70px;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    border-top: 1px solid var(--line);
+}
+
+.small-project {
+    padding: 25px 30px;
+
+    border-bottom: 1px solid var(--line);
+}
+
+.small-project:nth-child(odd) {
+    border-right: 1px solid var(--line);
+}
+
+.small-project h3 {
+    margin: 0 0 7px;
+
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.small-project p {
+    margin: 0;
+
+    color: var(--muted);
+    font-size: 13px;
+}
+
+@media (max-width: 650px) {
+    .small-projects {
+        grid-template-columns: 1fr;
+    }
+
+    .small-project:nth-child(odd) {
+        border-right: none;
+    }
+}
+
+/* =========================================================
    EDUCATION
-   ============================================================ */
-.edu-row{
-    display:flex;
-    justify-content:space-between;
-    align-items:baseline;
-    flex-wrap:wrap;
-    gap:8px;
-    padding:20px 0;
-}
-.edu-row .school{ color:var(--text-dim); font-size:14px; }
-.edu-row .years{ font-family:var(--mono); font-size:12px; color:var(--text-mute); }
+   ========================================================= */
 
-/* ============================================================
-   GITHUB CTA
-   ============================================================ */
-.gh-cta{
-    border:1px solid var(--line);
-    border-radius:10px;
-    padding:36px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:20px;
-    flex-wrap:wrap;
-}
-.gh-cta h3{
-    font-size:19px;
-    font-weight:600;
-    max-width:30ch;
-}
-.gh-cta p{
-    color:var(--text-dim);
-    font-size:14px;
-    margin-top:6px;
+.education {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 40px;
+
+    padding: 30px 0;
+
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
 }
 
-/* ============================================================
-   CONTACT
-   ============================================================ */
-.contact-links{
-    display:flex;
-    flex-direction:column;
-    margin-top:28px;
-}
-.contact-row{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:16px 0;
-    border-bottom:1px solid var(--line-soft);
-    font-family:var(--mono);
-    font-size:14px;
-    transition:color .15s ease;
-}
-.contact-row:last-child{ border-bottom:none; }
-.contact-row:hover{ color:var(--cloud); }
-.contact-row .k{ color:var(--text-mute); font-size:12px; }
+.education h3 {
+    margin: 0;
 
-/* ============================================================
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.education p {
+    margin: 7px 0 0;
+
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.education-meta {
+    align-self: center;
+
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--faint);
+    text-align: right;
+}
+
+@media (max-width: 650px) {
+    .education {
+        grid-template-columns: 1fr;
+    }
+
+    .education-meta {
+        text-align: left;
+    }
+}
+
+/* =========================================================
+   GITHUB / CONTACT
+   ========================================================= */
+
+.contact-section {
+    padding: 150px 0;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+}
+
+.contact-title {
+    max-width: 600px;
+
+    margin: 0;
+
+    font-size: clamp(38px, 5vw, 65px);
+    line-height: 1;
+    letter-spacing: -.05em;
+    font-weight: 500;
+}
+
+.contact-description {
+    margin-top: 25px;
+
+    color: var(--muted);
+    font-size: 15px;
+}
+
+.contact-links {
+    border-top: 1px solid var(--line);
+}
+
+.contact-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 17px 0;
+
+    border-bottom: 1px solid var(--line);
+
+    font-family: var(--mono);
+    font-size: 11px;
+
+    transition: color .2s ease;
+}
+
+.contact-link:hover {
+    color: var(--blue);
+}
+
+.contact-type {
+    color: var(--faint);
+    font-size: 9px;
+}
+
+@media (max-width: 800px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 55px;
+    }
+}
+
+/* =========================================================
    FOOTER
-   ============================================================ */
-footer{
-    padding:36px 0;
-}
-.foot-row{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    flex-wrap:wrap;
-    gap:10px;
-    font-size:12.5px;
-    color:var(--text-mute);
-}
-.foot-links{ display:flex; gap:18px; }
-.foot-links a:hover{ color:var(--cloud); }
+   ========================================================= */
 
-/* ============================================================
-   REVEAL
-   ============================================================ */
-.reveal{
-    opacity:0;
-    transform:translateY(10px);
-    transition:opacity .5s ease, transform .5s ease;
+footer {
+    padding: 30px 0 45px;
 }
-.reveal.in{
-    opacity:1;
-    transform:none;
+
+.footer-inner {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+
+    color: var(--faint);
+
+    font-family: var(--mono);
+    font-size: 9px;
+}
+
+@media (max-width: 600px) {
+    .footer-inner {
+        flex-direction: column;
+    }
+}
+
+/* =========================================================
+   SCROLL REVEAL
+   ========================================================= */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(14px);
+
+    transition:
+        opacity .7s ease,
+        transform .7s cubic-bezier(.2,.7,.2,1);
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
 }
 </style>
 </head>
+
 <body>
 
-<header>
-    <div class="wrap nav">
-        <a href="#top" class="brand">samarjeet<em>.</em>dev</a>
-        <nav class="nav-links">
-            <a href="#about">About</a>
-            <a href="#skills">Skills</a>
-            <a href="#experience">Experience</a>
-            <a href="#work">Work</a>
-            <a href="#contact">Contact</a>
+<!-- =======================================================
+     HEADER
+     ======================================================= -->
+
+<header class="site-header">
+    <div class="container header-inner">
+
+        <a href="#top" class="wordmark">
+            SAMARJEET<span>.</span>
+        </a>
+
+        <nav class="nav" aria-label="Primary navigation">
+            <a href="#about">ABOUT</a>
+            <a href="#skills">STACK</a>
+            <a href="#work">WORK</a>
+            <a href="#experience">EXPERIENCE</a>
+            <a href="#contact">CONTACT</a>
         </nav>
-        <div>
-            <a class="btn btn-ghost" href="https://github.com/Samarjeetgit" target="_blank" rel="noopener">GitHub ↗</a>
-        </div>
+
+        <span class="header-index">2026 / 05</span>
+
     </div>
 </header>
 
+
 <main id="top">
 
-    <!-- ============ HERO ============ -->
-    <section class="hero">
-        <div class="wrap">
-            <div class="hero-tag reveal">
-                <span><span class="dot" style="background:var(--cloud)"></span>AWS</span>
-                <span><span class="dot" style="background:var(--systems)"></span>LINUX</span>
-                <span><span class="dot" style="background:var(--program)"></span>PYTHON</span>
-                <span><span class="dot" style="background:var(--containers)"></span>NETWORKING</span>
+<!-- =======================================================
+     HERO
+     ======================================================= -->
+
+<section class="hero">
+    <div class="container hero-grid">
+
+        <div>
+
+            <div class="hero-kicker">
+                COMPUTER SCIENCE · IOT · INFRASTRUCTURE
             </div>
 
-            <h1 class="reveal">Building toward reliable cloud infrastructure, one system at a time.</h1>
+            <h1 class="hero-title">
+                Understanding<br>
+                what happens<br>
+                <em>under the application.</em>
+            </h1>
 
-            <div class="hero-role reveal">
-                <strong>Samarjeet</strong> — Aspiring Cloud Infrastructure &amp; Support Engineer
-            </div>
-
-            <p class="hero-desc reveal">
-                Currently studying Computer Science &amp; Engineering (IoT) and building hands-on
-                experience with AWS, Linux, Python automation, networking and containers.
-                I learn by building small systems, breaking them, and figuring out why.
+            <p class="hero-copy">
+                I'm Samarjeet, a Computer Science student building toward
+                Cloud Infrastructure and Support Engineering. My current
+                focus is AWS, Linux, Python automation, networking and
+                containerized systems.
             </p>
 
-            <div class="hero-actions reveal">
-                <a class="btn btn-primary" href="#work">View projects</a>
-                <a class="btn btn-ghost" href="https://github.com/Samarjeetgit" target="_blank" rel="noopener">GitHub ↗</a>
-                <a class="btn btn-ghost" href="https://www.linkedin.com/in/samarjeet-564670290/" target="_blank" rel="noopener">LinkedIn ↗</a>
+            <div class="hero-actions">
+                <a href="#work" class="button primary">
+                    Selected work ↓
+                </a>
+
+                <a
+                    href="https://github.com/Samarjeetgit"
+                    target="_blank"
+                    rel="noopener"
+                    class="button"
+                >
+                    GitHub ↗
+                </a>
+
+                <a
+                    href="https://www.linkedin.com/in/samarjeet-564670290/"
+                    target="_blank"
+                    rel="noopener"
+                    class="button"
+                >
+                    LinkedIn ↗
+                </a>
             </div>
 
-            <!-- SIGNATURE ELEMENT: infrastructure topology diagram, color-coded by category -->
-            <div class="diagram-frame reveal">
-                <div class="diagram-head">
-                    <span>topology.svg</span>
-                    <span>current stack</span>
-                </div>
-                <div class="diagram-body">
-                    <svg class="diagram-svg" viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram showing data flow from CSV through Python validation, Boto3, IAM, into DynamoDB, running on Linux, deployed via Docker">
-                        <!-- edges -->
-                        <path class="edge" d="M 120 60 L 120 110" />
-                        <path class="edge" d="M 300 60 L 300 110" />
-                        <path class="edge" d="M 480 60 L 480 110" />
-                        <path class="edge" d="M 120 150 L 300 150 L 300 110" />
-                        <path class="edge" d="M 300 150 L 480 150 L 480 110" />
-                        <path class="edge" d="M 300 150 L 300 190" />
-                        <path class="edge" d="M 300 230 L 300 260" />
-                        <path class="edge" d="M 120 260 L 300 260" />
-                        <path class="edge" d="M 480 260 L 300 260" />
-
-                        <!-- top row -->
-                        <g class="node">
-                            <rect class="node-box" x="60" y="20" width="120" height="40" rx="6"/>
-                            <rect class="node-tick" x="60" y="20" width="3" height="40" fill="var(--text-mute)"/>
-                            <text x="128" y="36" text-anchor="middle">CSV Input</text>
-                            <text class="node-sub" x="128" y="50" text-anchor="middle">raw records</text>
-                        </g>
-                        <g class="node program">
-                            <rect class="node-box" x="240" y="20" width="120" height="40" rx="6"/>
-                            <rect class="node-tick" x="240" y="20" width="3" height="40" fill="var(--program)"/>
-                            <text x="308" y="36" text-anchor="middle">Validation</text>
-                            <text class="node-sub" x="308" y="50" text-anchor="middle">Python</text>
-                        </g>
-                        <g class="node cloud">
-                            <rect class="node-box" x="420" y="20" width="120" height="40" rx="6"/>
-                            <rect class="node-tick" x="420" y="20" width="3" height="40" fill="var(--cloud)"/>
-                            <text x="488" y="36" text-anchor="middle">Boto3</text>
-                            <text class="node-sub" x="488" y="50" text-anchor="middle">AWS SDK</text>
-                        </g>
-
-                        <!-- middle row -->
-                        <g class="node cloud">
-                            <rect class="node-box" x="240" y="112" width="120" height="40" rx="6"/>
-                            <rect class="node-tick" x="240" y="112" width="3" height="40" fill="var(--cloud)"/>
-                            <text x="308" y="128" text-anchor="middle">IAM</text>
-                            <text class="node-sub" x="308" y="142" text-anchor="middle">least privilege</text>
-                        </g>
-
-                        <!-- lower node -->
-                        <g class="node cloud">
-                            <rect class="node-box" x="240" y="192" width="120" height="40" rx="6"/>
-                            <rect class="node-tick" x="240" y="192" width="3" height="40" fill="var(--cloud)"/>
-                            <text x="308" y="208" text-anchor="middle">DynamoDB</text>
-                            <text class="node-sub" x="308" y="222" text-anchor="middle">unique records</text>
-                        </g>
-
-                        <!-- bottom row: runtime -->
-                        <g class="node systems">
-                            <rect class="node-box" x="60" y="242" width="120" height="40" rx="6"/>
-                            <rect class="node-tick" x="60" y="242" width="3" height="40" fill="var(--systems)"/>
-                            <text x="128" y="258" text-anchor="middle">Linux</text>
-                            <text class="node-sub" x="128" y="272" text-anchor="middle">runtime</text>
-                        </g>
-                        <g class="node containers">
-                            <rect class="node-box" x="420" y="242" width="120" height="40" rx="6"/>
-                            <rect class="node-tick" x="420" y="242" width="3" height="40" fill="var(--containers)"/>
-                            <text x="488" y="258" text-anchor="middle">Docker</text>
-                            <text class="node-sub" x="488" y="272" text-anchor="middle">container</text>
-                        </g>
-                    </svg>
-                </div>
-                <div class="diagram-legend">
-                    <span><span class="dot" style="background:var(--cloud)"></span>AWS / cloud</span>
-                    <span><span class="dot" style="background:var(--program)"></span>logic</span>
-                    <span><span class="dot" style="background:var(--systems)"></span>runtime</span>
-                    <span><span class="dot" style="background:var(--containers)"></span>containers</span>
-                </div>
-            </div>
         </div>
-    </section>
 
-    <!-- ============ ABOUT ============ -->
-    <section id="about">
-        <div class="wrap">
-            <div class="label reveal">About</div>
-            <h2 class="reveal">Still a student, moving deliberately.</h2>
-            <p class="lede reveal">
-                I'm a B.Tech Computer Science &amp; Engineering (IoT) student at Sikkim Manipal
-                Institute of Technology, currently in my 5th semester.
-            </p>
 
-            <div class="about-grid">
-                <div class="about-body reveal">
-                    <p>
-                        I'm moving toward <strong>cloud infrastructure and support engineering</strong>.
-                        What draws me there is wanting to understand how systems actually work
-                        underneath the applications people use — the networking, the permissions,
-                        the failure modes.
+        <aside class="hero-side">
+
+            <div class="hero-side-label">
+                Current position
+            </div>
+
+            <div class="hero-side-item">
+                <span>Role</span>
+                <span>Student Engineer</span>
+            </div>
+
+            <div class="hero-side-item">
+                <span>Direction</span>
+                <span>Cloud / Systems</span>
+            </div>
+
+            <div class="hero-side-item">
+                <span>Institute</span>
+                <span>SMIT</span>
+            </div>
+
+            <div class="hero-side-item">
+                <span>Semester</span>
+                <span>05 / 08</span>
+            </div>
+
+            <div class="hero-side-item">
+                <span>Graduation</span>
+                <span>2028</span>
+            </div>
+
+        </aside>
+
+    </div>
+</section>
+
+
+<!-- =======================================================
+     ABOUT
+     ======================================================= -->
+
+<section id="about" class="section">
+
+    <div class="container">
+
+        <div class="section-intro reveal">
+
+            <div class="section-label">
+                About
+            </div>
+
+            <div>
+                <h2 class="section-title">
+                    Still learning. Building seriously.
+                </h2>
+
+                <p class="section-description">
+                    I am interested in the systems beneath software —
+                    infrastructure, networking, permissions, data flow,
+                    automation and the things that become visible when
+                    something breaks.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="about-layout">
+
+            <div class="about-text reveal">
+
+                <p>
+                    I'm pursuing a <strong>B.Tech in Computer Science &
+                    Engineering (IoT)</strong> at Sikkim Manipal Institute
+                    of Technology.
+                </p>
+
+                <p>
+                    My direction is gradually moving toward
+                    <strong>cloud infrastructure and support engineering</strong>.
+                    I enjoy working close to the system rather than only
+                    at the application layer.
+                </p>
+
+                <p>
+                    Most importantly, I'm still a student. I don't have
+                    production-scale infrastructure experience, so I try
+                    to be precise about what I know and what I'm currently
+                    learning.
+                </p>
+
+                <div class="about-note">
+                    Learning approach → build · break · inspect · fix · repeat
+                </div>
+
+            </div>
+
+
+            <div class="interests reveal">
+
+                <div class="interests-heading">
+                    Areas of interest
+                </div>
+
+                <div class="interest">
+                    <strong>Cloud infrastructure</strong>
+                    <span>01</span>
+                </div>
+
+                <div class="interest">
+                    <strong>Linux systems</strong>
+                    <span>02</span>
+                </div>
+
+                <div class="interest">
+                    <strong>Networking</strong>
+                    <span>03</span>
+                </div>
+
+                <div class="interest">
+                    <strong>Automation</strong>
+                    <span>04</span>
+                </div>
+
+                <div class="interest">
+                    <strong>Databases</strong>
+                    <span>05</span>
+                </div>
+
+                <div class="interest">
+                    <strong>Containers</strong>
+                    <span>06</span>
+                </div>
+
+                <div class="interest">
+                    <strong>Troubleshooting</strong>
+                    <span>07</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =======================================================
+     SKILLS
+     ======================================================= -->
+
+<section id="skills" class="section">
+
+    <div class="container">
+
+        <div class="section-intro reveal">
+
+            <div class="section-label">
+                Technical stack
+            </div>
+
+            <div>
+                <h2 class="section-title">
+                    Tools I use and concepts I'm developing.
+                </h2>
+
+                <p class="section-description">
+                    No percentage bars. No artificial proficiency scores.
+                    The stack reflects what I have worked with and what
+                    I'm currently developing depth in.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="skill-index reveal">
+
+            <div class="skill-row">
+                <div class="skill-category">Cloud</div>
+
+                <div class="skill-items">
+                    <span>AWS</span>
+                    <span>DynamoDB</span>
+                    <span>IAM</span>
+                    <span>Boto3</span>
+                </div>
+
+                <div class="skill-level">Hands-on</div>
+            </div>
+
+
+            <div class="skill-row">
+                <div class="skill-category">Systems</div>
+
+                <div class="skill-items">
+                    <span>Linux</span>
+                    <span>Operating Systems</span>
+                    <span>Computer Networks</span>
+                </div>
+
+                <div class="skill-level">Developing</div>
+            </div>
+
+
+            <div class="skill-row">
+                <div class="skill-category">Programming</div>
+
+                <div class="skill-items">
+                    <span>Python</span>
+                    <span>C++</span>
+                </div>
+
+                <div class="skill-level">Working</div>
+            </div>
+
+
+            <div class="skill-row">
+                <div class="skill-category">Containers</div>
+
+                <div class="skill-items">
+                    <span>Docker</span>
+                    <span>Kubernetes</span>
+                </div>
+
+                <div class="skill-level">Learning</div>
+            </div>
+
+
+            <div class="skill-row">
+                <div class="skill-category">Databases</div>
+
+                <div class="skill-items">
+                    <span>MySQL</span>
+                    <span>DBMS</span>
+                    <span>Firebase</span>
+                </div>
+
+                <div class="skill-level">Working</div>
+            </div>
+
+
+            <div class="skill-row">
+                <div class="skill-category">Tools</div>
+
+                <div class="skill-items">
+                    <span>Git</span>
+                    <span>GitHub</span>
+                    <span>VS Code</span>
+                    <span>Bash</span>
+                </div>
+
+                <div class="skill-level">Daily</div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =======================================================
+     PROJECTS
+     ======================================================= -->
+
+<section id="work" class="section">
+
+    <div class="container">
+
+        <div class="section-intro reveal">
+
+            <div class="section-label">
+                Selected work
+            </div>
+
+            <div>
+                <h2 class="section-title">
+                    Projects that explain how I think.
+                </h2>
+
+                <p class="section-description">
+                    I prefer small systems with a clear engineering
+                    problem over projects that exist mainly to look
+                    impressive.
+                </p>
+            </div>
+
+        </div>
+
+
+        <!-- FEATURED -->
+
+        <article class="project-feature reveal">
+
+            <div class="project-header">
+
+                <div>
+
+                    <div class="project-index">
+                        FEATURED / AWS
+                    </div>
+
+                    <h3 class="project-title">
+                        Data redundancy &
+                        deduplication pipeline.
+                    </h3>
+
+                    <p class="project-summary">
+                        A Python and AWS workflow built during my
+                        cloud internship at CodeAlpha. Incoming
+                        records are validated and checked against
+                        existing DynamoDB data before persistence.
                     </p>
-                    <p>
-                        Most of what I know comes from building small things and debugging them
-                        when they break: a deduplication pipeline that failed on edge-case records,
-                        an IoT device that dropped its MQTT connection, a container that wouldn't
-                        start because of a permissions issue. I don't have production experience yet
-                        — I'm building toward it.
-                    </p>
+
                 </div>
-                <ul class="interest-list reveal">
-                    <li><span class="dot" style="background:var(--cloud)"></span>Cloud infrastructure</li>
-                    <li><span class="dot" style="background:var(--systems)"></span>Linux</li>
-                    <li><span class="dot" style="background:var(--containers)"></span>Networking</li>
-                    <li><span class="dot" style="background:var(--program)"></span>Automation</li>
-                    <li><span class="dot" style="background:var(--data)"></span>Databases</li>
-                    <li><span class="dot" style="background:var(--containers)"></span>Containers</li>
-                    <li><span class="dot" style="background:var(--highlight)"></span>Troubleshooting</li>
-                </ul>
+
+
+                <div class="project-meta">
+
+                    <div class="project-meta-label">
+                        Stack
+                    </div>
+
+                    <div class="project-stack">
+                        Python<br>
+                        Boto3<br>
+                        DynamoDB<br>
+                        IAM
+                    </div>
+
+                </div>
+
             </div>
+
+
+            <div class="architecture">
+
+                <div class="architecture-visual">
+
+                    <div class="pipeline">
+
+                        <div class="pipeline-node">
+                            <span></span>
+                            <div class="pipeline-name">CSV input</div>
+                            <div class="pipeline-type">SOURCE</div>
+                        </div>
+
+                        <div class="pipeline-arrow"></div>
+
+                        <div class="pipeline-node">
+                            <span></span>
+                            <div class="pipeline-name">Python validation</div>
+                            <div class="pipeline-type">LOGIC</div>
+                        </div>
+
+                        <div class="pipeline-arrow"></div>
+
+                        <div class="pipeline-node">
+                            <span></span>
+                            <div class="pipeline-name">Boto3 / IAM</div>
+                            <div class="pipeline-type">AWS ACCESS</div>
+                        </div>
+
+                        <div class="pipeline-arrow"></div>
+
+                        <div class="pipeline-node">
+                            <span></span>
+                            <div class="pipeline-name">DynamoDB</div>
+                            <div class="pipeline-type">PERSISTENCE</div>
+                        </div>
+
+                        <div class="pipeline-arrow"></div>
+
+                        <div class="pipeline-node">
+                            <span></span>
+                            <div class="pipeline-name">Unique records</div>
+                            <div class="pipeline-type">RESULT</div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="case-study">
+
+                    <div class="case-grid">
+
+                        <div class="case-block">
+
+                            <h3>Problem</h3>
+
+                            <p>
+                                Duplicate records can reduce data
+                                quality and create unnecessary
+                                storage or processing overhead.
+                            </p>
+
+                        </div>
+
+
+                        <div class="case-block">
+
+                            <h3>Approach</h3>
+
+                            <p>
+                                Validate incoming data, compare it
+                                with existing records, filter
+                                duplicates and persist only unique
+                                entries.
+                            </p>
+
+                        </div>
+
+
+                        <div class="case-block">
+
+                            <h3>Result</h3>
+
+                            <p>
+                                A 10-row validation dataset produced
+                                6 retained records after 4 redundant
+                                rows were filtered.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="engineering-decisions">
+
+                        <div class="decision">
+
+                            <div class="decision-name">
+                                Why DynamoDB?
+                            </div>
+
+                            <div class="decision-reason">
+                                The project required straightforward
+                                key-based record lookup against
+                                existing cloud data.
+                            </div>
+
+                        </div>
+
+
+                        <div class="decision">
+
+                            <div class="decision-name">
+                                Why Boto3?
+                            </div>
+
+                            <div class="decision-reason">
+                                It allowed the Python workflow to
+                                interact directly with DynamoDB and
+                                keep the data-processing logic in one
+                                script.
+                            </div>
+
+                        </div>
+
+
+                        <div class="decision">
+
+                            <div class="decision-name">
+                                Validate before write
+                            </div>
+
+                            <div class="decision-reason">
+                                Filtering before persistence avoids
+                                having to clean up duplicates after
+                                they have already entered storage.
+                            </div>
+
+                        </div>
+
+
+                        <div class="decision">
+
+                            <div class="decision-name">
+                                Least privilege
+                            </div>
+
+                            <div class="decision-reason">
+                                The AWS identity should receive only
+                                the permissions required by the
+                                pipeline rather than broad access.
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="result-bar">
+
+                        <div class="result">
+                            <span class="result-number">10</span>
+                            <span class="result-label">
+                                input records
+                            </span>
+                        </div>
+
+                        <div class="result">
+                            <span class="result-number">4</span>
+                            <span class="result-label">
+                                duplicates filtered
+                            </span>
+                        </div>
+
+                        <div class="result">
+                            <span class="result-number">6</span>
+                            <span class="result-label">
+                                unique retained
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <div class="project-note">
+                        Validation dataset · not production-scale benchmarking
+                    </div>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <!-- SECOND PROJECT -->
+
+        <article class="secondary-project reveal">
+
+            <div class="secondary-copy">
+
+                <div class="secondary-label">
+                    IoT / Cloud telemetry
+                </div>
+
+                <h3 class="secondary-title">
+                    Multi-Zone Smart Irrigation
+                    &amp; Cloud Telemetry System
+                </h3>
+
+                <p>
+                    A system connecting physical sensors with
+                    networked telemetry and cloud storage. Different
+                    irrigation zones can be monitored independently
+                    rather than relying on one global threshold.
+                </p>
+
+                <div class="secondary-tech">
+                    ESP32 · C/C++ · Python<br>
+                    MQTT · Firebase Realtime Database<br>
+                    DHT11 · Capacitive moisture sensors
+                </div>
+
+            </div>
+
+
+            <div class="telemetry">
+
+                <div class="telemetry-diagram">
+
+                    <div class="telemetry-row">
+
+                        <div class="telemetry-node">
+                            SENSOR
+                        </div>
+
+                        <div class="telemetry-line"></div>
+
+                        <div class="telemetry-node">
+                            ESP32
+                        </div>
+
+                        <div class="telemetry-line"></div>
+
+                        <div class="telemetry-node">
+                            MQTT
+                        </div>
+
+                    </div>
+
+                    <div style="
+                        width:1px;
+                        height:35px;
+                        margin:auto;
+                        background:var(--line-strong);
+                    "></div>
+
+                    <div class="telemetry-row">
+
+                        <div class="telemetry-node">
+                            CLOUD
+                        </div>
+
+                        <div class="telemetry-line"></div>
+
+                        <div class="telemetry-node">
+                            DECISION
+                        </div>
+
+                        <div class="telemetry-line"></div>
+
+                        <div class="telemetry-node">
+                            VALVE
+                        </div>
+
+                    </div>
+
+                    <div class="telemetry-caption">
+                        telemetry → decision → targeted actuation
+                    </div>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <!-- SMALL PROJECTS -->
+
+        <div class="small-projects reveal">
+
+            <article class="small-project">
+
+                <h3>Password Generator</h3>
+
+                <p>
+                    Python utility for configurable password generation
+                    and scripting practice.
+                </p>
+
+            </article>
+
+
+            <article class="small-project">
+
+                <h3>AI Chatbot</h3>
+
+                <p>
+                    Python chatbot exploring basic NLP, intent matching
+                    and response handling.
+                </p>
+
+            </article>
+
+
+            <article class="small-project">
+
+                <h3>Email Extractor</h3>
+
+                <p>
+                    Regex-based text processing utility for extracting
+                    email addresses.
+                </p>
+
+            </article>
+
+
+            <article class="small-project">
+
+                <h3>Simple Stock Tracker</h3>
+
+                <p>
+                    Lightweight Python project focused on data retrieval
+                    and automation.
+                </p>
+
+            </article>
+
         </div>
-    </section>
 
-    <!-- ============ SKILLS ============ -->
-    <section id="skills">
-        <div class="wrap">
-            <div class="label reveal">Skills</div>
-            <h2 class="reveal">What I work with.</h2>
-            <p class="lede reveal">Listed as technical metadata, not proficiency ratings. Color marks the category — the same key runs through the diagram above and the tags below.</p>
+    </div>
 
-            <div class="matrix reveal">
-                <div class="matrix-row">
-                    <div class="matrix-key"><span class="dot" style="background:var(--cloud)"></span>Cloud</div>
-                    <div class="matrix-val">AWS<span class="sep">·</span>DynamoDB<span class="sep">·</span>IAM<span class="sep">·</span>Boto3</div>
+</section>
+
+
+<!-- =======================================================
+     EXPERIENCE
+     ======================================================= -->
+
+<section id="experience" class="section">
+
+    <div class="container">
+
+        <div class="section-intro reveal">
+
+            <div class="section-label">
+                Work log
+            </div>
+
+            <div>
+                <h2 class="section-title">
+                    Short internships. Real things built.
+                </h2>
+
+                <p class="section-description">
+                    Early experience, presented without inflating
+                    the scope.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="work-log reveal">
+
+            <article class="work-entry">
+
+                <div class="work-year">
+                    2026
                 </div>
-                <div class="matrix-row">
-                    <div class="matrix-key"><span class="dot" style="background:var(--systems)"></span>Systems</div>
-                    <div class="matrix-val">Linux<span class="sep">·</span>Operating Systems<span class="sep">·</span>Computer Networks</div>
+
+                <div class="work-company">
+                    CODEALPHA
                 </div>
-                <div class="matrix-row">
-                    <div class="matrix-key"><span class="dot" style="background:var(--program)"></span>Programming</div>
-                    <div class="matrix-val">Python<span class="sep">·</span>C++</div>
+
+                <div>
+
+                    <div class="work-role">
+                        Cloud Computing Intern
+                    </div>
+
+                    <div class="work-description">
+                        Built a cloud data preprocessing workflow
+                        using Python and Boto3. The workflow ingested
+                        structured data, validated records, checked
+                        DynamoDB for existing entries and filtered
+                        duplicates before persistence.
+                    </div>
+
+                    <div class="work-tech">
+                        Python · Boto3 · AWS DynamoDB · IAM · CSV
+                    </div>
+
                 </div>
-                <div class="matrix-row">
-                    <div class="matrix-key"><span class="dot" style="background:var(--containers)"></span>Containers</div>
-                    <div class="matrix-val">Docker<span class="sep">·</span>Kubernetes</div>
+
+            </article>
+
+
+            <article class="work-entry">
+
+                <div class="work-year">
+                    JUN 2026
                 </div>
-                <div class="matrix-row">
-                    <div class="matrix-key"><span class="dot" style="background:var(--data)"></span>Databases</div>
-                    <div class="matrix-val">MySQL<span class="sep">·</span>DBMS<span class="sep">·</span>Firebase</div>
+
+                <div class="work-company">
+                    CODSOFT
                 </div>
-                <div class="matrix-row">
-                    <div class="matrix-key"><span class="dot" style="background:var(--text-mute)"></span>Tools</div>
-                    <div class="matrix-val">Git<span class="sep">·</span>GitHub<span class="sep">·</span>VS Code</div>
+
+                <div>
+
+                    <div class="work-role">
+                        Python Developer Intern
+                    </div>
+
+                    <div class="work-description">
+                        Worked on a collection of small Python
+                        applications covering automation, basic NLP,
+                        regular expressions and data-oriented scripting.
+                    </div>
+
+                    <div class="work-tech">
+                        Python · NLP · Regex · Automation
+                    </div>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =======================================================
+     TROUBLESHOOTING
+     ======================================================= -->
+
+<section class="section">
+
+    <div class="container">
+
+        <div class="section-intro reveal">
+
+            <div class="section-label">
+                Engineering mindset
+            </div>
+
+            <div>
+                <h2 class="section-title">
+                    Debugging before guessing.
+                </h2>
+
+                <p class="section-description">
+                    Infrastructure problems rarely announce their
+                    root cause. I'm developing the habit of narrowing
+                    the problem before changing things.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="troubleshooting">
+
+            <div class="troubleshooting-copy reveal">
+
+                <p>
+                    When something doesn't work, I want to understand
+                    the failure rather than immediately patching the
+                    symptom.
+                </p>
+
+                <p>
+                    This is still a developing habit, but it is the
+                    mindset I want to carry into infrastructure
+                    support work.
+                </p>
+
+            </div>
+
+
+            <div class="debug-flow reveal">
+
+                <div class="debug-step">
+                    <div class="debug-number">01</div>
+                    <div class="debug-name">Observe</div>
+                    <div class="debug-description">
+                        What actually happened?
+                    </div>
+                </div>
+
+                <div class="debug-step">
+                    <div class="debug-number">02</div>
+                    <div class="debug-name">Isolate</div>
+                    <div class="debug-description">
+                        Where does the failure begin?
+                    </div>
+                </div>
+
+                <div class="debug-step">
+                    <div class="debug-number">03</div>
+                    <div class="debug-name">Inspect</div>
+                    <div class="debug-description">
+                        Logs, configuration, network, permissions.
+                    </div>
+                </div>
+
+                <div class="debug-step">
+                    <div class="debug-number">04</div>
+                    <div class="debug-name">Identify</div>
+                    <div class="debug-description">
+                        Separate the cause from the symptom.
+                    </div>
+                </div>
+
+                <div class="debug-step">
+                    <div class="debug-number">05</div>
+                    <div class="debug-name">Fix</div>
+                    <div class="debug-description">
+                        Make the smallest appropriate change.
+                    </div>
+                </div>
+
+                <div class="debug-step">
+                    <div class="debug-number">06</div>
+                    <div class="debug-name">Verify</div>
+                    <div class="debug-description">
+                        Confirm the system actually recovered.
+                    </div>
+                </div>
+
+                <div class="debug-step">
+                    <div class="debug-number">07</div>
+                    <div class="debug-name">Document</div>
+                    <div class="debug-description">
+                        Record what happened and why.
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =======================================================
+     CURRENTLY LEARNING
+     ======================================================= -->
+
+<section class="section">
+
+    <div class="container">
+
+        <div class="section-intro reveal">
+
+            <div class="section-label">
+                Current focus
+            </div>
+
+            <div>
+                <h2 class="section-title">
+                    Building depth, not collecting badges.
+                </h2>
+
+                <p class="section-description">
+                    These are areas I'm actively studying or practising.
+                    The labels describe learning stage, not expertise.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="learning-list reveal">
+
+            <div class="learning-row">
+                <div class="learning-name">
+                    AWS Infrastructure
+                </div>
+                <div class="learning-status learning">
+                    Learning
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- ============ EXPERIENCE ============ -->
-    <section id="experience">
-        <div class="wrap">
-            <div class="label reveal">Experience</div>
-            <h2 class="reveal">Internships.</h2>
-            <p class="lede reveal">Short, hands-on, and specific about what was built.</p>
+            <div class="learning-row">
+                <div class="learning-name">
+                    Linux Administration
+                </div>
+                <div class="learning-status practicing">
+                    Practicing
+                </div>
+            </div>
+
+            <div class="learning-row">
+                <div class="learning-name">
+                    Docker
+                </div>
+                <div class="learning-status building">
+                    Building
+                </div>
+            </div>
+
+            <div class="learning-row">
+                <div class="learning-name">
+                    Kubernetes
+                </div>
+                <div class="learning-status learning">
+                    Learning
+                </div>
+            </div>
+
+            <div class="learning-row">
+                <div class="learning-name">
+                    Cloud Monitoring
+                </div>
+                <div class="learning-status learning">
+                    Learning
+                </div>
+            </div>
+
+            <div class="learning-row">
+                <div class="learning-name">
+                    Networking
+                </div>
+                <div class="learning-status practicing">
+                    Practicing
+                </div>
+            </div>
+
+            <div class="learning-row">
+                <div class="learning-name">
+                    Python Automation
+                </div>
+                <div class="learning-status building">
+                    Building
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =======================================================
+     EDUCATION
+     ======================================================= -->
+
+<section class="section">
+
+    <div class="container">
+
+        <div class="section-label reveal">
+            Education
+        </div>
+
+        <div class="education reveal">
+
+            <div>
+
+                <h3>
+                    B.Tech — Computer Science &amp; Engineering (IoT)
+                </h3>
+
+                <p>
+                    Sikkim Manipal Institute of Technology
+                </p>
+
+            </div>
+
+            <div class="education-meta">
+                5TH SEMESTER<br>
+                EXPECTED 2028
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =======================================================
+     CONTACT
+     ======================================================= -->
+
+<section id="contact" class="contact-section">
+
+    <div class="container">
+
+        <div class="contact-grid">
 
             <div class="reveal">
-                <article class="job">
-                    <div class="job-meta">Remote<br>1 month · 2026</div>
-                    <div>
-                        <div class="job-title">Cloud Computing Intern — <span class="job-org">CodeAlpha</span></div>
-                        <div class="job-stack">Python · Boto3 · AWS DynamoDB · IAM</div>
-                        <p class="job-desc">
-                            Built an automated cloud data preprocessing workflow that reads structured
-                            datasets, validates records, checks them against existing DynamoDB data,
-                            and filters duplicates before persistence.
-                        </p>
-                        <ul class="job-list">
-                            <li>CSV data ingestion and record validation</li>
-                            <li>DynamoDB matching against existing records</li>
-                            <li>Duplicate filtering before write</li>
-                            <li>Boto3 automation with least-privilege IAM roles</li>
-                        </ul>
-                        <span class="result-chip">4 duplicate rows removed from a 10-row validation dataset</span>
-                    </div>
-                </article>
 
-                <article class="job">
-                    <div class="job-meta">Remote<br>June 2026 · 1 month</div>
-                    <div>
-                        <div class="job-title">Python Developer Intern — <span class="job-org">CodSoft</span></div>
-                        <div class="job-stack">Python · NLP · Regex · Automation</div>
-                        <p class="job-desc">
-                            Practical Python development across four small utilities — a password
-                            generator, an AI chatbot, an email extractor and a simple stock tracker —
-                            focused on scripting and automation fundamentals.
-                        </p>
-                    </div>
-                </article>
-            </div>
-        </div>
-    </section>
+                <h2 class="contact-title">
+                    Interested in reliable systems?
+                </h2>
 
-    <!-- ============ FEATURED PROJECT ============ -->
-    <section id="work">
-        <div class="wrap">
-            <div class="label reveal">Selected work</div>
-            <h2 class="reveal">Projects.</h2>
-            <p class="lede reveal">The featured project reflects the direction I'm building toward — cloud data infrastructure.</p>
-
-            <div class="case reveal">
-                <div class="case-top">
-                    <div>
-                        <h3>AWS DynamoDB Data Redundancy &amp; Deduplication Pipeline</h3>
-                        <div class="case-stack">Python · AWS DynamoDB · Boto3 · IAM</div>
-                    </div>
-                </div>
-
-                <div class="case-sections">
-                    <div class="case-block">
-                        <h4>Problem</h4>
-                        <p>Duplicate records reduce data quality and create unnecessary storage and processing overhead as datasets grow.</p>
-                    </div>
-                    <div class="case-block">
-                        <h4>Approach</h4>
-                        <p>Incoming structured data is validated and compared against existing DynamoDB records before being persisted, so duplicates never reach storage.</p>
-                    </div>
-
-                    <div class="case-block">
-                        <h4>Engineering decisions</h4>
-                        <ul>
-                            <li>DynamoDB for fast key-based lookups during matching</li>
-                            <li>Boto3 to script AWS interactions directly from Python</li>
-                            <li>Validation runs before persistence, not after</li>
-                            <li>IAM roles scoped to least privilege for the pipeline</li>
-                        </ul>
-                    </div>
-                    <div class="case-block">
-                        <h4>Why it matters</h4>
-                        <p>Catching duplicates pre-write avoids costly cleanup later and keeps the access pattern narrow enough to audit — a habit that matters more once a pipeline runs unattended.</p>
-                    </div>
-
-                    <div class="case-arch">CSV
-  ↓
-Python Validation
-  ↓
-Boto3
-  ↓
-IAM
-  ↓
-DynamoDB
-  ↓
-Unique Records</div>
-
-                    <div class="case-result">
-                        <div class="result-stat"><span class="num">10</span><span class="cap">records in validation set</span></div>
-                        <div class="result-stat"><span class="num">4</span><span class="cap">duplicates filtered</span></div>
-                        <div class="result-stat"><span class="num">6</span><span class="cap">unique records retained</span></div>
-                    </div>
-                    <p class="case-note">Validation dataset, not production-scale benchmarking.</p>
-                </div>
-            </div>
-
-            <!-- SECOND PROJECT -->
-            <div class="project-card reveal" style="margin-top:20px;">
-                <h3>Multi-Zone Smart Irrigation &amp; Cloud Telemetry System</h3>
-                <div class="case-stack">ESP32 · Python · C/C++ · MQTT · Firebase Realtime Database · DHT11 · Capacitive moisture sensors</div>
-                <p>
-                    An IoT project connecting physical sensors to cloud infrastructure. Multiple
-                    zones are monitored independently, telemetry streams over MQTT to a cloud
-                    database, and irrigation valves are actuated based on per-zone moisture
-                    thresholds rather than a single global rule.
+                <p class="contact-description">
+                    I'm looking to keep learning through internships,
+                    practical projects and early-career opportunities
+                    around cloud infrastructure and support engineering.
                 </p>
-                <div class="flow">Sensors <span class="arrow">→</span> ESP32 <span class="arrow">→</span> MQTT <span class="arrow">→</span> Cloud Telemetry <span class="arrow">→</span> Decision Logic <span class="arrow">→</span> Targeted Valve Control</div>
-                <div class="tag-row">
-                    <span class="tag">Multi-zone monitoring</span>
-                    <span class="tag">MQTT messaging</span>
-                    <span class="tag">Cloud data storage</span>
-                    <span class="tag">Threshold automation</span>
-                    <span class="tag">Remote monitoring</span>
-                </div>
+
             </div>
 
-            <!-- PYTHON PROJECTS -->
-            <div style="margin-top:20px;">
-                <div class="label reveal" style="margin-top:8px;">Also built</div>
-                <div class="py-list reveal">
-                    <details class="py-item">
-                        <summary>Password Generator</summary>
-                        <div class="py-body">A configurable password generator with control over length and character sets, built to practice secure randomness in Python.</div>
-                    </details>
-                    <details class="py-item">
-                        <summary>AI Chatbot</summary>
-                        <div class="py-body">A rule-based conversational chatbot exploring basic NLP techniques for intent matching and response generation.</div>
-                    </details>
-                    <details class="py-item">
-                        <summary>Email Extractor</summary>
-                        <div class="py-body">A regex-based utility that scans text and pulls out valid email addresses, built to practice pattern matching.</div>
-                    </details>
-                    <details class="py-item">
-                        <summary>Simple Stock Tracker</summary>
-                        <div class="py-body">A lightweight script that tracks stock price data and reports changes, built as a practical automation exercise.</div>
-                    </details>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============ TROUBLESHOOTING ============ -->
-    <section id="approach">
-        <div class="wrap">
-            <div class="label reveal">Engineering mindset</div>
-            <h2 class="reveal">How I approach a problem.</h2>
-            <p class="lede reveal">This is the sequence I'm developing toward infrastructure support work — not a formula, but a habit.</p>
-
-            <div class="tshoot reveal">
-                <div class="tshoot-step"><span class="n">01</span>Observe</div>
-                <div class="tshoot-step"><span class="n">02</span>Isolate</div>
-                <div class="tshoot-step"><span class="n">03</span>Inspect</div>
-                <div class="tshoot-step"><span class="n">04</span>Identify</div>
-                <div class="tshoot-step"><span class="n">05</span>Fix</div>
-                <div class="tshoot-step"><span class="n">06</span>Verify</div>
-                <div class="tshoot-step"><span class="n">07</span>Document</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============ CURRENTLY LEARNING ============ -->
-    <section id="learning">
-        <div class="wrap">
-            <div class="label reveal">Currently</div>
-            <h2 class="reveal">What I'm building depth in.</h2>
-            <p class="lede reveal">Status color: amber = building, teal = practicing, blue = early learning.</p>
-
-            <div class="learn-grid reveal">
-                <div class="learn-item st-learning"><div class="name">AWS Infrastructure</div><div class="status">Learning</div></div>
-                <div class="learn-item st-practicing"><div class="name">Linux Administration</div><div class="status">Practicing</div></div>
-                <div class="learn-item st-building"><div class="name">Docker</div><div class="status">Building</div></div>
-                <div class="learn-item st-learning"><div class="name">Kubernetes</div><div class="status">Learning</div></div>
-                <div class="learn-item st-learning"><div class="name">Cloud Monitoring</div><div class="status">Learning</div></div>
-                <div class="learn-item st-practicing"><div class="name">Networking</div><div class="status">Practicing</div></div>
-                <div class="learn-item st-building"><div class="name">Python Automation</div><div class="status">Building</div></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============ EDUCATION ============ -->
-    <section id="education">
-        <div class="wrap">
-            <div class="label reveal">Education</div>
-            <div class="edu-row reveal">
-                <div>
-                    <h2 style="font-size:18px;">B.Tech, Computer Science &amp; Engineering (IoT)</h2>
-                    <div class="school">Sikkim Manipal Institute of Technology</div>
-                </div>
-                <div class="years">Expected 2028 · 5th semester</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============ GITHUB CTA ============ -->
-    <section id="github">
-        <div class="wrap">
-            <div class="gh-cta reveal">
-                <div>
-                    <h3>Don't take my word for it. Look at the code.</h3>
-                    <p>Every project referenced here is in a public repository.</p>
-                </div>
-                <a class="btn btn-primary" href="https://github.com/Samarjeetgit" target="_blank" rel="noopener">github.com/Samarjeetgit ↗</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============ CONTACT ============ -->
-    <section id="contact">
-        <div class="wrap">
-            <div class="label reveal">Contact</div>
-            <h2 class="reveal">Interested in building reliable systems?</h2>
-            <p class="lede reveal">Open to internships and early-career roles in cloud infrastructure and support.</p>
-
-            <!--
-                RESUME: place your PDF at ./resume.pdf in the same folder as this
-                file and uncomment the two lines below to enable the download button.
-            -->
-            <!-- <a class="btn btn-ghost reveal" href="./resume.pdf" download>Download Resume</a> -->
 
             <div class="contact-links reveal">
-                <a class="contact-row" href="mailto:samarjeet2097@gmail.com">
+
+                <a
+                    href="mailto:samarjeet2097@gmail.com"
+                    class="contact-link"
+                >
                     <span>samarjeet2097@gmail.com</span>
-                    <span class="k">EMAIL</span>
+                    <span class="contact-type">EMAIL ↗</span>
                 </a>
-                <a class="contact-row" href="https://github.com/Samarjeetgit" target="_blank" rel="noopener">
+
+
+                <a
+                    href="https://github.com/Samarjeetgit"
+                    target="_blank"
+                    rel="noopener"
+                    class="contact-link"
+                >
                     <span>github.com/Samarjeetgit</span>
-                    <span class="k">GITHUB</span>
+                    <span class="contact-type">CODE ↗</span>
                 </a>
-                <a class="contact-row" href="https://www.linkedin.com/in/samarjeet-564670290/" target="_blank" rel="noopener">
+
+
+                <a
+                    href="https://www.linkedin.com/in/samarjeet-564670290/"
+                    target="_blank"
+                    rel="noopener"
+                    class="contact-link"
+                >
                     <span>linkedin.com/in/samarjeet</span>
-                    <span class="k">LINKEDIN</span>
+                    <span class="contact-type">PROFILE ↗</span>
                 </a>
+
             </div>
+
         </div>
-    </section>
+
+    </div>
+
+</section>
 
 </main>
 
+
+<!-- =======================================================
+     FOOTER
+     ======================================================= -->
+
 <footer>
-    <div class="wrap foot-row">
-        <div>Samarjeet — Cloud Infrastructure / Support Engineering<br>© 2026</div>
-        <div class="foot-links">
-            <a href="https://github.com/Samarjeetgit" target="_blank" rel="noopener">GitHub</a>
-            <a href="https://www.linkedin.com/in/samarjeet-564670290/" target="_blank" rel="noopener">LinkedIn</a>
-            <a href="mailto:samarjeet2097@gmail.com">Email</a>
-        </div>
+
+    <div class="container footer-inner">
+
+        <span>
+            SAMARJEET · CLOUD INFRASTRUCTURE / SYSTEMS
+        </span>
+
+        <span>
+            © 2026
+        </span>
+
     </div>
+
 </footer>
 
+
 <script>
-(function(){
-    var els = document.querySelectorAll('.reveal');
-    if(!('IntersectionObserver' in window)){
-        els.forEach(function(el){ el.classList.add('in'); });
+/* =========================================================
+   Small, purposeful interaction:
+   elements reveal as they enter the viewport.
+   Falls back gracefully when IntersectionObserver isn't
+   available.
+   ========================================================= */
+
+(function () {
+
+    const elements = document.querySelectorAll(".reveal");
+
+    if (!("IntersectionObserver" in window)) {
+        elements.forEach(function (element) {
+            element.classList.add("visible");
+        });
         return;
     }
-    var io = new IntersectionObserver(function(entries){
-        entries.forEach(function(entry){
-            if(entry.isIntersecting){
-                entry.target.classList.add('in');
-                io.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.08 });
-    els.forEach(function(el){ io.observe(el); });
+
+    const observer = new IntersectionObserver(
+        function (entries, observer) {
+
+            entries.forEach(function (entry) {
+
+                if (entry.isIntersecting) {
+
+                    entry.target.classList.add("visible");
+
+                    observer.unobserve(entry.target);
+                }
+
+            });
+
+        },
+        {
+            threshold: 0.08,
+            rootMargin: "0px 0px -30px 0px"
+        }
+    );
+
+    elements.forEach(function (element) {
+        observer.observe(element);
+    });
+
 })();
 </script>
 
 </body>
 </html>
+```
