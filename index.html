@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Samarjeet — Aspiring Cloud Infrastructure & Support Engineer">
+<title>Samarjeet | Cloud Infrastructure & Support Engineer</title>
+
+<style>
+:root{
+    --bg:#060b11;
+    --bg2:#0a121b;
+    --card:#0d1721;
+    --card2:#111e2a;
+    --text:#f4f8fc;
+    --muted:#8fa3b4;
+    --line:rgba(190,220,240,.13);
+    --blue:#63d1ff;
+    --purple:#8790ff;
+    --green:#65dfa4;
+    --shadow:0 25px 80px rgba(0,0,0,.35);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+html{scroll-behavior:smooth}
+
+body{
+    background:
+      radial-gradient(circle at 85% 0%,rgba(76,170,255,.13),transparent 30%),
+      radial-gradient(circle at 0% 40%,rgba(116,96,255,.08),transparent 28%),
+      var(--bg);
+    color:var(--text);
+    font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    line-height:1.7;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+.container{
+    width:min(1120px,92%);
+    margin:auto;
+}
+
+/* NAVIGATION */
+
+nav{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:rgba(6,11,17,.78);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid var(--line);
+}
+
+.nav-inner{
+    height:72px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-weight:800;
+    letter-spacing:.14em;
+}
+
+.logo span{
+    color:var(--blue);
+}
+
+.nav-links{
+    display:flex;
+    gap:28px;
+    color:var(--muted);
+    font-size:14px;
+}
+
+.nav-links a{
+    transition:.25s;
+}
+
+.nav-links a:hover{
+    color:var(--text);
+}
+
+/* HERO */
+
+.hero{
+    min-height:calc(100vh - 72px);
+    display:grid;
+    grid-template-columns:1.12fr .88fr;
+    gap:70px;
+    align-items:center;
+    padding:70px 0;
+}
+
+.eyebrow{
+    color:var(--blue);
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+}
+
+.hero h1{
+    font-size:clamp(48px,7vw,84px);
+    line-height:.95;
+    letter-spacing:-.065em;
+    margin:18px 0;
+}
+
+.hero h1 span{
+    display:block;
+    color:#a5b8c8;
+}
+
+.hero-description{
+    max-width:650px;
+    color:var(--muted);
+    font-size:18px;
+}
+
+.buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-top:30px;
+}
+
+.btn{
+    padding:12px 18px;
+    border-radius:11px;
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.025);
+    transition:.25s;
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+    border-color:rgba(99,209,255,.5);
+}
+
+.btn-primary{
+    background:linear-gradient(135deg,var(--blue),var(--purple));
+    color:#031018;
+    border:0;
+    font-weight:800;
+}
+
+/* TERMINAL */
+
+.terminal{
+    background:linear-gradient(145deg,#101d28,#070e15);
+    border:1px solid var(--line);
+    border-radius:22px;
+    box-shadow:var(--shadow);
+    overflow:hidden;
+}
+
+.terminal-top{
+    padding:14px 18px;
+    border-bottom:1px solid var(--line);
+}
+
+.dot{
+    display:inline-block;
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:#62717d;
+    margin-right:6px;
+}
+
+.terminal-body{
+    padding:27px;
+    font:12px/1.8 ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+
+.command{
+    color:var(--blue);
+    margin-bottom:14px;
+}
+
+.status{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    padding:11px 0;
+    border-bottom:1px solid var(--line);
+}
+
+.status:last-child{
+    border:0;
+}
+
+.active{
+    color:var(--green);
+}
+
+/* SECTIONS */
+
+section{
+    padding:105px 0;
+}
+
+.section-heading{
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    gap:30px;
+    margin-bottom:38px;
+}
+
+.kicker{
+    color:var(--blue);
+    font-size:11px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    font-weight:800;
+}
+
+.section-heading h2{
+    font-size:40px;
+    line-height:1.1;
+    letter-spacing:-.045em;
+    margin-top:7px;
+}
+
+.section-heading p{
+    max-width:500px;
+    color:var(--muted);
+}
+
+/* CARDS */
+
+.grid-2{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+}
+
+.card{
+    background:linear-gradient(145deg,rgba(15,29,41,.88),rgba(7,15,22,.92));
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:28px;
+    box-shadow:0 15px 50px rgba(0,0,0,.12);
+}
+
+.card p{
+    color:var(--muted);
+}
+
+/* SKILLS */
+
+.skills{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+}
+
+.skill-title{
+    font-size:18px;
+    margin-bottom:13px;
+}
+
+.tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+.tag{
+    padding:6px 9px;
+    border-radius:8px;
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.025);
+    color:#c7d7e3;
+    font-size:12px;
+}
+
+/* EXPERIENCE */
+
+.timeline{
+    display:grid;
+    gap:18px;
+}
+
+.experience{
+    display:grid;
+    grid-template-columns:180px 1fr;
+    gap:25px;
+}
+
+.date{
+    color:var(--blue);
+    font-size:12px;
+}
+
+.experience h3{
+    font-size:21px;
+}
+
+.role{
+    color:#c5d5e1;
+    font-size:13px;
+}
+
+.metric{
+    display:inline-block;
+    margin-top:12px;
+    padding:6px 10px;
+    border-radius:8px;
+    color:var(--green);
+    background:rgba(101,223,164,.07);
+    font-size:12px;
+}
+
+/* PROJECTS */
+
+.projects{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+}
+
+.featured{
+    grid-column:span 2;
+}
+
+.project-number{
+    color:var(--blue);
+    font:11px ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+
+.project h3{
+    font-size:26px;
+    margin:10px 0 3px;
+}
+
+.stack{
+    color:#9db0bf;
+    font-size:12px;
+}
+
+.architecture{
+    margin-top:18px;
+    padding:15px;
+    background:#050a0f;
+    border:1px solid var(--line);
+    border-radius:11px;
+    color:#a9bfce;
+    font:11px/1.8 ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+
+/* TROUBLESHOOTING */
+
+.process{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:8px;
+}
+
+.step{
+    padding:18px 7px;
+    text-align:center;
+    border:1px solid var(--line);
+    border-radius:12px;
+    background:rgba(255,255,255,.025);
+    font-size:12px;
+}
+
+.step strong{
+    display:block;
+    color:var(--blue);
+    margin-bottom:4px;
+}
+
+/* LEARNING */
+
+.learning{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+}
+
+.learning-card{
+    padding:21px;
+    border:1px solid var(--line);
+    border-radius:16px;
+    background:rgba(255,255,255,.025);
+}
+
+.learning-card small{
+    color:var(--blue);
+}
+
+/* CONTACT */
+
+.contact{
+    display:grid;
+    grid-template-columns:1.15fr .85fr;
+    gap:18px;
+}
+
+.contact h2{
+    font-size:42px;
+    line-height:1.05;
+    margin:10px 0;
+}
+
+.contact-link{
+    display:block;
+    padding:10px 0;
+    color:#c8d8e3;
+    border-bottom:1px solid var(--line);
+}
+
+.contact-link:hover{
+    color:var(--blue);
+}
+
+/* FOOTER */
+
+footer{
+    border-top:1px solid var(--line);
+    padding:32px 0;
+    color:var(--muted);
+    font-size:13px;
+    display:flex;
+    justify-content:space-between;
+}
+
+/* ANIMATION */
+
+.reveal{
+    opacity:0;
+    transform:translateY(20px);
+    transition:opacity .7s ease,transform .7s ease;
+}
+
+.reveal.visible{
+    opacity:1;
+    transform:none;
+}
+
+/* MOBILE */
+
+@media(max-width:850px){
+
+    .nav-links{
+        display:none;
+    }
+
+    .hero{
+        grid-template-columns:1fr;
+        gap:45px;
+    }
+
+    .grid-2,
+    .contact{
+        grid-template-columns:1fr;
+    }
+
+    .skills{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .experience{
+        grid-template-columns:1fr;
+        gap:5px;
+    }
+
+    .process{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .learning{
+        grid-template-columns:1fr 1fr;
+    }
+}
+
+@media(max-width:560px){
+
+    section{
+        padding:75px 0;
+    }
+
+    .hero{
+        padding:55px 0;
+    }
+
+    .hero h1{
+        font-size:49px;
+    }
+
+    .skills,
+    .projects,
+    .learning{
+        grid-template-columns:1fr;
+    }
+
+    .featured{
+        grid-column:auto;
+    }
+
+    .section-heading{
+        display:block;
+    }
+
+    .section-heading h2{
+        font-size:33px;
+    }
+
+    .footer{
+        display:block;
+    }
+
+    footer div{
+        margin:6px 0;
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+
+<nav>
+<div class="container nav-inner">
+
+<a href="#home" class="logo">
+S<span>/</span>SAMARJEET
+</a>
+
+<div class="nav-links">
+<a href="#about">About</a>
+<a href="#skills">Skills</a>
+<a href="#experience">Experience</a>
+<a href="#projects">Projects</a>
+<a href="#contact">Contact</a>
+</div>
+
+</div>
+</nav>
+
+<main id="home">
+
+<!-- HERO -->
+
+<section class="hero container">
+
+<div class="reveal">
+
+<div class="eyebrow">
+Cloud Infrastructure · Support · Automation
+</div>
+
+<h1>
+Samarjeet
+<span>builds reliable systems.</span>
+</h1>
+
+<p class="hero-description">
+Aspiring Cloud Infrastructure & Support Engineer focused on AWS,
+Linux, Python automation, networking and cloud-connected systems.
+</p>
+
+<div class="buttons">
+
+<a class="btn btn-primary" href="#projects">
+Explore my work
+</a>
+
+<a class="btn" href="https://github.com/Samarjeetgit" target="_blank">
+GitHub ↗
+</a>
+
+<a class="btn" href="mailto:samarjeet2097@gmail.com">
+Email me
+</a>
+
+</div>
+
+</div>
+
+<div class="terminal reveal">
+
+<div class="terminal-top">
+<span class="dot"></span>
+<span class="dot"></span>
+<span class="dot"></span>
+</div>
+
+<div class="terminal-body">
+
+<div class="command">
+$ systemctl status samarjeet
+</div>
+
+<div class="status">
+<span>cloud_focus</span>
+<span class="active">active</span>
+</div>
+
+<div class="status">
+<span>aws</span>
+<span>building</span>
+</div>
+
+<div class="status">
+<span>linux</span>
+<span>practicing</span>
+</div>
+
+<div class="status">
+<span>automation</span>
+<span>python / boto3</span>
+</div>
+
+<div class="status">
+<span>containers</span>
+<span>docker / kubernetes</span>
+</div>
+
+<div class="status">
+<span>availability</span>
+<span class="active">open to opportunities</span>
+</div>
+
+</div>
+</div>
+
+</section>
+
+<!-- ABOUT -->
+
+<section id="about">
+
+<div class="container">
+
+<div class="section-heading reveal">
+
+<div>
+<div class="kicker">01 / Profile</div>
+<h2>Engineering with a systems mindset.</h2>
+</div>
+
+<p>
+I'm building toward cloud infrastructure and support roles by
+combining hands-on projects with strong foundations in systems,
+networking and scripting.
+</p>
+
+</div>
+
+<div class="grid-2">
+
+<div class="card reveal">
+<h3>What I bring</h3>
+
+<p>
+I have hands-on exposure to AWS DynamoDB, IAM, Boto3,
+Linux environments and cloud-integrated data workflows.
+My IoT work adds practical experience with MQTT,
+telemetry and automated control.
+</p>
+
+</div>
+
+<div class="card reveal">
+<h3>How I work</h3>
+
+<p>
+I approach problems systematically: understand the symptom,
+isolate the layer, inspect evidence, verify configuration and
+permissions, test the fix, and document the result.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- SKILLS -->
+
+<section id="skills">
+
+<div class="container">
+
+<div class="section-heading reveal">
+
+<div>
+<div class="kicker">02 / Toolkit</div>
+<h2>Infrastructure-focused skills.</h2>
+</div>
+
+</div>
+
+<div class="skills">
+
+<div class="card reveal">
+<div class="skill-title">☁ Cloud</div>
+<div class="tags">
+<span class="tag">AWS</span>
+<span class="tag">DynamoDB</span>
+<span class="tag">IAM</span>
+<span class="tag">Boto3</span>
+</div>
+</div>
+
+<div class="card reveal">
+<div class="skill-title">⌁ Systems</div>
+<div class="tags">
+<span class="tag">Linux</span>
+<span class="tag">Operating Systems</span>
+<span class="tag">Computer Networks</span>
+</div>
+</div>
+
+<div class="card reveal">
+<div class="skill-title">⚙ Automation</div>
+<div class="tags">
+<span class="tag">Python</span>
+<span class="tag">C++</span>
+<span class="tag">Scripting</span>
+</div>
+</div>
+
+<div class="card reveal">
+<div class="skill-title">▣ Containers</div>
+<div class="tags">
+<span class="tag">Docker</span>
+<span class="tag">Kubernetes</span>
+</div>
+</div>
+
+<div class="card reveal">
+<div class="skill-title">▤ Data</div>
+<div class="tags">
+<span class="tag">MySQL</span>
+<span class="tag">DBMS</span>
+<span class="tag">Firebase</span>
+</div>
+</div>
+
+<div class="card reveal">
+<div class="skill-title">⌘ Tools</div>
+<div class="tags">
+<span class="tag">Git</span>
+<span class="tag">GitHub</span>
+<span class="tag">VS Code</span>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- EXPERIENCE -->
+
+<section id="experience">
+
+<div class="container">
+
+<div class="section-heading reveal">
+
+<div>
+<div class="kicker">03 / Experience</div>
+<h2>Hands-on, not just theoretical.</h2>
+</div>
+
+</div>
+
+<div class="timeline">
+
+<article class="card experience reveal">
+
+<div class="date">
+REMOTE · 2026
+</div>
+
+<div>
+
+<h3>
+Cloud Computing Intern — CodeAlpha
+</h3>
+
+<div class="role">
+AWS · Python · Boto3 · IAM · DynamoDB
+</div>
+
+<p>
+Built an automated data validation and deduplication workflow
+that ingests CSV data, cross-references records against DynamoDB
+and filters duplicates before persistence. Applied least-privilege
+IAM practices to protect cloud database operations.
+</p>
+
+<span class="metric">
+40% redundant entries filtered in validation dataset
+</span>
+
+</div>
+
+</article>
+
+<article class="card experience reveal">
+
+<div class="date">
+JUN 2026 · 1 MONTH
+</div>
+
+<div>
+
+<h3>
+Python Developer Intern — CodSoft
+</h3>
+
+<div class="role">
+Python · Automation · NLP · Regex
+</div>
+
+<p>
+Implemented practical Python utilities including a password
+generator, AI chatbot, regex-based email extractor and stock
+tracker, strengthening scripting, automation and problem-solving.
+</p>
+
+</div>
+
+</article>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- PROJECTS -->
+
+<section id="projects">
+
+<div class="container">
+
+<div class="section-heading reveal">
+
+<div>
+<div class="kicker">04 / Selected Work</div>
+<h2>Projects that point toward infrastructure.</h2>
+</div>
+
+<p>
+Presented as engineering problems, not just technology lists.
+</p>
+
+</div>
+
+<div class="projects">
+
+<article class="card featured reveal">
+
+<div class="project-number">
+01 · FEATURED / CLOUD
+</div>
+
+<h3>
+AWS DynamoDB Data Deduplication Pipeline
+</h3>
+
+<div class="stack">
+Python · AWS DynamoDB · Boto3 · IAM
+</div>
+
+<p>
+Automated cloud data preprocessing utility designed to enforce
+data integrity before persistence. Structured data is validated,
+matched against DynamoDB records and filtered so only unique
+entries are stored.
+</p>
+
+<div class="architecture">
+CSV DATA
+    ↓
+VALIDATION
+    ↓
+BOTO3
+    ↓
+IAM
+    ↓
+DYNAMODB
+    ↓
+UNIQUE RECORDS
+</div>
+
+<span class="metric">
+4 duplicate rows removed from 10 validation rows
+</span>
+
+</article>
+
+<article class="card reveal">
+
+<div class="project-number">
+02 · IOT / CLOUD
+</div>
+
+<h3>
+Multi-Zone Smart Irrigation & Cloud Telemetry
+</h3>
+
+<div class="stack">
+ESP32 · Python · MQTT · Firebase · C/C++
+</div>
+
+<p>
+Cloud-connected irrigation system that captures environmental
+and soil data, streams telemetry and independently actuates
+valves based on local moisture thresholds.
+</p>
+
+<div class="architecture">
+SENSORS
+→ ESP32
+→ MQTT
+→ CLOUD TELEMETRY
+→ DECISION
+→ VALVE
+</div>
+
+</article>
+
+<article class="card reveal">
+
+<div class="project-number">
+03 · PYTHON
+</div>
+
+<h3>
+Python Engineering Toolkit
+</h3>
+
+<div class="stack">
+Python · NLP · Regex · Automation
+</div>
+
+<p>
+A collection of practical internship projects covering secure
+password generation, intent-driven chatbot interaction,
+text parsing and a simple stock-tracking utility.
+</p>
+
+<div class="tags" style="margin-top:18px">
+
+<span class="tag">Password Generator</span> <span class="tag">AI Chatbot</span> <span class="tag">Email Extractor</span> <span class="tag">Stock Tracker</span>
+
+</div>
+
+</article>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- TROUBLESHOOTING -->
+
+<section>
+
+<div class="container">
+
+<div class="section-heading reveal">
+
+<div>
+<div class="kicker">05 / Troubleshooting</div>
+<h2>A systematic approach to incidents.</h2>
+</div>
+
+<p>
+Cloud support is as much about disciplined investigation
+as it is about knowing services.
+</p>
+
+</div>
+
+<div class="process reveal">
+
+<div class="step"><strong>01</strong>Observe</div>
+<div class="step"><strong>02</strong>Isolate</div>
+<div class="step"><strong>03</strong>Investigate</div>
+<div class="step"><strong>04</strong>Identify</div>
+<div class="step"><strong>05</strong>Fix</div>
+<div class="step"><strong>06</strong>Verify</div>
+<div class="step"><strong>07</strong>Document</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- CURRENTLY LEARNING -->
+
+<section>
+
+<div class="container">
+
+<div class="section-heading reveal">
+
+<div>
+<div class="kicker">06 / Growth</div>
+<h2>Currently building depth.</h2>
+</div>
+
+</div>
+
+<div class="learning">
+
+<div class="learning-card reveal">
+<strong>AWS Infrastructure</strong><br>
+<small>Practicing</small>
+</div>
+
+<div class="learning-card reveal">
+<strong>Linux Administration</strong><br>
+<small>Practicing</small>
+</div>
+
+<div class="learning-card reveal">
+<strong>Docker</strong><br>
+<small>Building</small>
+</div>
+
+<div class="learning-card reveal">
+<strong>Kubernetes</strong><br>
+<small>Exploring</small>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- EDUCATION -->
+
+<section>
+
+<div class="container">
+
+<div class="card reveal">
+
+<div class="kicker">
+07 / Education
+</div>
+
+<h2 style="margin-top:8px">
+B.Tech — Computer Science & Engineering (IoT)
+</h2>
+
+<p>
+Sikkim Manipal Institute of Technology · Expected 2028
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- CONTACT -->
+
+<section id="contact">
+
+<div class="container">
+
+<div class="contact">
+
+<div class="card reveal">
+
+<div class="kicker">
+08 / Contact
+</div>
+
+<h2>
+Let's build reliable systems.
+</h2>
+
+<p>
+Open to internships and early-career opportunities in
+cloud infrastructure, cloud support and related engineering roles.
+</p>
+
+</div>
+
+<div class="card reveal">
+
+<div class="kicker">
+Connect
+</div>
+
+<a class="contact-link"
+href="mailto:samarjeet2097@gmail.com">
+[samarjeet2097@gmail.com](mailto:samarjeet2097@gmail.com) </a>
+
+<a class="contact-link"
+href="https://github.com/Samarjeetgit"
+target="_blank">
+github.com/Samarjeetgit ↗ </a>
+
+<a class="contact-link"
+href="https://www.linkedin.com/in/samarjeet-564670290/"
+target="_blank">
+LinkedIn ↗ </a>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+<footer class="container">
+
+<div>
+© 2026 Samarjeet
+</div>
+
+<div>
+Cloud Infrastructure · Support · Automation
+</div>
+
+</footer>
+
+<script>
+const observer = new IntersectionObserver(
+(entries)=>{
+    entries.forEach(entry=>{
+        if(entry.isIntersecting){
+            entry.target.classList.add("visible");
+        }
+    });
+},
+{threshold:.08}
+);
+
+document.querySelectorAll(".reveal").forEach(element=>{
+    observer.observe(element);
+});
+</script>
+
+</body>
+</html>
