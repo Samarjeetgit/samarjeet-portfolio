@@ -4266,93 +4266,53 @@ section{position:relative;}
 }
 </style>
 
-<style id="final-layout-fix">
-/* FINAL READABILITY + BORDER CLEANUP */
-html, body { overflow-x: hidden !important; }
+<style id="hero-final-polish">
+/* FINAL HERO / SIDE PANEL POLISH */
+.hero-title > span { white-space: nowrap !important; }
+.role {
+  font-size: clamp(16px, 1.25vw, 20px) !important;
+  line-height: 1.45 !important;
+  color: #b9b9b5 !important;
+}
+.role strong { font-size: 1.12em !important; color: #f7f7f5 !important; }
+.hero-side-panel {
+  border: 0 !important;
+  outline: 0 !important;
+  background:
+    radial-gradient(circle at var(--glass-x,50%) var(--glass-y,20%), color-mix(in srgb, var(--random-shade) 10%, transparent), transparent 48%),
+    linear-gradient(145deg, rgba(255,255,255,.075), rgba(255,255,255,.018)) !important;
+  backdrop-filter: blur(26px) saturate(140%) !important;
+  -webkit-backdrop-filter: blur(26px) saturate(140%) !important;
+  box-shadow:
+    0 28px 80px rgba(0,0,0,.34),
+    inset 0 1px 0 rgba(255,255,255,.055),
+    inset 0 -1px 0 rgba(255,255,255,.018) !important;
+  border-radius: 22px !important;
+  overflow: hidden;
+}
+.hero-side-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at var(--glass-x,50%) var(--glass-y,20%), color-mix(in srgb, var(--random-shade) 12%, transparent), transparent 42%);
+  opacity: .9;
+}
+.hero-side-panel > * { position: relative; z-index: 1; }
+.hero-panel-index {
+  color: color-mix(in srgb, var(--random-shade) 75%, white 20%) !important;
+  font-size: 11px !important;
+}
+.hero-panel-label { color: #aaa !important; }
+.hero-side-panel strong { font-size: 16px !important; }
+.hero-side-panel span { color: #a7a7a3 !important; }
+.hero-panel-rule { background: rgba(255,255,255,.055) !important; }
 
-/* Eliminate vertical/side borders everywhere while retaining the glass surfaces. */
-*, *::before, *::after {
-  border-left: 0 !important;
-  border-right: 0 !important;
-}
+/* Absolutely no visible side borders on the hero itself. */
+.hero, .hero::before, .hero::after { border-left: 0 !important; border-right: 0 !important; }
 
-/* Keep the hero statement inside the viewport at every width. */
-.hero-title {
-  width: 100% !important;
-  max-width: 1080px !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  text-wrap: balance !important;
-  overflow: visible !important;
-}
-.hero-title > span {
-  display: block !important;
-  white-space: normal !important;
-  overflow-wrap: normal !important;
-  word-break: normal !important;
-  max-width: 100% !important;
-}
-.hero-title > span:nth-child(1) { max-width: 760px !important; }
-.hero-title > span:nth-child(2) { max-width: 930px !important; }
-.hero-title > span:nth-child(3) { max-width: 820px !important; }
-
-/* Deliberate three-line rhythm on desktop; natural wrapping on smaller screens. */
-@media (min-width: 901px) {
-  .hero-title {
-    font-size: clamp(46px, 5.7vw, 82px) !important;
-    line-height: .99 !important;
-    letter-spacing: -.055em !important;
-  }
-}
-@media (max-width: 900px) {
-  .hero-title {
-    font-size: clamp(40px, 9.5vw, 66px) !important;
-    line-height: 1.02 !important;
-    letter-spacing: -.045em !important;
-  }
-}
-@media (max-width: 520px) {
-  .hero-title {
-    font-size: clamp(36px, 10.8vw, 54px) !important;
-  }
-}
-
-
-/* =========================================================
-   FINAL HERO TYPOGRAPHY + EDGE CLEANUP
-   ========================================================= */
-.hero-title {
-    width: min(100%, 900px);
-    max-width: 900px;
-    margin-inline: auto;
-    font-size: clamp(40px, 5.35vw, 76px);
-    line-height: 1.02;
-    letter-spacing: -0.045em;
-    overflow-wrap: normal;
-    word-break: normal;
-    text-wrap: balance;
-}
-
-.hero-title > span {
-    display: block;
-    white-space: normal !important;
-    overflow-wrap: normal;
-    word-break: normal;
-}
-
-/* No vertical side borders anywhere; retain horizontal separation where useful. */
-*, *::before, *::after {
-    border-left: 0 !important;
-    border-right: 0 !important;
-}
-
-@media (max-width: 720px) {
-    .hero-title {
-        width: min(100%, 94vw);
-        font-size: clamp(34px, 9.8vw, 54px);
-        line-height: 1.04;
-        letter-spacing: -0.04em;
-    }
+@media (max-width: 1100px) {
+  .hero-side-panel { display: none !important; }
 }
 </style>
 </head>
@@ -4394,8 +4354,8 @@ html, body { overflow-x: hidden !important; }
         </div>
 <h1 class="reveal hero-title">
 <span>Building reliable systems</span>
-<span>through infrastructure, automation</span>
-<span class="subtle">and debugging.</span>
+<span>through infrastructure,</span>
+<span class="subtle">automation and debugging.</span>
 </h1>
 <div class="role reveal">
 <strong>Samarjeet</strong>
