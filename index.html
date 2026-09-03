@@ -4314,6 +4314,336 @@ section{position:relative;}
 @media (max-width: 1100px) {
   .hero-side-panel { display: none !important; }
 }
+
+
+/* =========================================================
+   MOBILE-FIRST PASS — 2026
+   Desktop remains untouched above this block.
+   ========================================================= */
+@media (max-width: 700px) {
+  :root { --mobile-gutter: 18px; }
+
+  html { scroll-padding-top: 78px; }
+  body { overflow-x: clip; font-size: 15px; }
+
+  .cursor-glow { display: none !important; }
+  body::before { opacity: .022; }
+
+  /* Compact glass navigation */
+  .navbar {
+    padding: 14px var(--mobile-gutter) !important;
+    background: rgba(8,8,8,.78) !important;
+    backdrop-filter: blur(18px) saturate(120%) !important;
+    -webkit-backdrop-filter: blur(18px) saturate(120%) !important;
+  }
+  .navbar.scrolled { padding: 11px var(--mobile-gutter) !important; }
+  .nav-inner {
+    width: 100%;
+    grid-template-columns: 1fr auto;
+    gap: 10px;
+  }
+  .nav-left { font-size: 12px !important; letter-spacing: .08em; }
+  .nav-left span { color: #777 !important; }
+  .nav-right { display: flex; align-items: center; gap: 8px; }
+  .nav-github { display: none !important; }
+  .mobile-nav-toggle {
+    width: 44px; height: 44px; border: 0; border-radius: 14px;
+    display: grid; place-items: center; color: #f4f4f1;
+    background: rgba(255,255,255,.055);
+    box-shadow: inset 0 1px rgba(255,255,255,.06), 0 12px 35px rgba(0,0,0,.28);
+    font-size: 19px; cursor: pointer;
+  }
+  .nav-center {
+    position: fixed !important;
+    top: 68px; left: var(--mobile-gutter); right: var(--mobile-gutter);
+    display: grid !important; gap: 3px;
+    padding: 10px !important;
+    border: 0 !important;
+    border-radius: 20px !important;
+    background: linear-gradient(145deg, rgba(24,24,24,.96), rgba(10,10,10,.94)) !important;
+    backdrop-filter: blur(24px) saturate(135%) !important;
+    -webkit-backdrop-filter: blur(24px) saturate(135%) !important;
+    box-shadow: 0 25px 70px rgba(0,0,0,.55), inset 0 1px rgba(255,255,255,.07) !important;
+    opacity: 0; visibility: hidden; transform: translateY(-8px) scale(.98);
+    transition: opacity .25s ease, transform .25s var(--ease), visibility .25s;
+    z-index: 200;
+  }
+  .navbar.mobile-open .nav-center { opacity: 1; visibility: visible; transform: none; }
+  .nav-center a {
+    min-height: 48px; display: flex !important; align-items: center;
+    padding: 0 14px !important; border-radius: 12px;
+    color: #e8e8e5 !important; font-size: 14px !important;
+  }
+  .nav-center a:active, .nav-center a:hover { background: rgba(255,255,255,.06); }
+
+  .shade-randomizer {
+    right: 14px !important; bottom: 14px !important;
+    min-height: 42px !important; padding: 0 13px !important;
+    font-size: 11px !important; z-index: 90 !important;
+  }
+
+  /* Keep every section safely inside the viewport */
+  .container {
+    width: 100% !important;
+    max-width: none !important;
+    padding-left: var(--mobile-gutter) !important;
+    padding-right: var(--mobile-gutter) !important;
+  }
+  section { width: 100%; overflow: clip; }
+
+  /* Hero */
+  .hero {
+    min-height: auto !important;
+    padding-top: 112px !important;
+    padding-bottom: 42px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+  .hero > div:not(.hero-spotlight):not(.scene) { width: 100%; }
+  .kicker {
+    font-size: 9px !important; letter-spacing: .16em !important;
+    line-height: 1.5 !important; margin-bottom: 18px !important;
+  }
+  .hero-title {
+    max-width: 100% !important;
+    font-size: clamp(38px, 11.5vw, 56px) !important;
+    line-height: .98 !important;
+    letter-spacing: -.055em !important;
+  }
+  .hero-title > span { white-space: normal !important; display: block !important; }
+  .role {
+    margin-top: 19px !important;
+    font-size: 17px !important;
+    line-height: 1.35 !important;
+    flex-wrap: wrap; justify-content: center; gap: 5px;
+  }
+  .role-divider { opacity: .45; }
+  .hero-portrait {
+    width: min(82vw, 350px) !important;
+    height: min(82vw, 350px) !important;
+    margin: 26px auto 22px !important;
+    border-radius: 30px !important;
+    box-shadow: none !important;
+    border: 0 !important;
+    background: transparent !important;
+  }
+  .hero-portrait::before { opacity: .72; }
+  .hero-portrait::after { box-shadow: none !important; background: transparent !important; }
+  .hero-portrait img { object-fit: contain !important; transform: none !important; }
+  .hero-copy {
+    max-width: 590px !important;
+    margin: 0 auto !important;
+    font-size: 15px !important;
+    line-height: 1.7 !important;
+    color: #b8b8b4 !important;
+  }
+  .hero-actions {
+    width: 100%; margin-top: 24px !important;
+    display: flex !important; flex-direction: column !important;
+    align-items: stretch !important; gap: 10px !important;
+  }
+  .hero-work-btn { width: 100% !important; min-height: 52px !important; justify-content: center; }
+  .hero-socials { justify-content: center !important; gap: 9px !important; }
+  .hero-social { width: 48px !important; height: 48px !important; }
+
+  /* Infrastructure scene: visual support, not a desktop canvas squeezed onto a phone */
+  .hero > .scene {
+    width: 100% !important;
+    height: 255px !important;
+    min-height: 255px !important;
+    margin: 32px 0 0 !important;
+    border-radius: 22px !important;
+  }
+  .scene-label { font-size: 8px !important; letter-spacing: .14em !important; }
+  .scene-note { font-size: 8px !important; }
+  .scene .node { transform: scale(.72); }
+  .scene .n1 { left: 50% !important; top: 22% !important; }
+  .scene .n2 { left: 8% !important; top: 39% !important; }
+  .scene .n3 { right: 8% !important; top: 39% !important; }
+  .scene .n4 { left: 20% !important; bottom: 8% !important; }
+  .scene .n5 { right: 20% !important; bottom: 8% !important; }
+  .scene .n6 { display: none !important; }
+
+  /* Section rhythm */
+  section:not(#hero) { padding-top: 58px !important; padding-bottom: 58px !important; }
+  .section-head {
+    display: block !important; margin-bottom: 26px !important;
+  }
+  .section-label { margin-bottom: 9px !important; font-size: 9px !important; letter-spacing: .16em !important; }
+  .section-title {
+    font-size: clamp(28px, 8vw, 38px) !important;
+    line-height: 1.05 !important; letter-spacing: -.04em !important;
+  }
+  .section-intro { font-size: 14px !important; line-height: 1.65 !important; margin-top: 12px !important; }
+
+  /* Glass surfaces become touch-friendly */
+  .hero-side-panel, .about-aside, .skills, .experience-item, .featured,
+  .second-project, .python-list, .contact-panel, .credential-stage, .github-card,
+  .learning-item, .edu, .iot-visual {
+    border: 0 !important;
+    border-radius: 20px !important;
+    box-shadow: 0 18px 48px rgba(0,0,0,.28), inset 0 1px rgba(255,255,255,.055) !important;
+    backdrop-filter: blur(16px) saturate(120%) !important;
+    -webkit-backdrop-filter: blur(16px) saturate(120%) !important;
+  }
+
+  /* Focus / Profile */
+  .hero-panels, .about-grid { grid-template-columns: 1fr !important; gap: 12px !important; }
+  .hero-side-panel { padding: 20px !important; }
+
+  /* Experience */
+  .experience { display: grid !important; gap: 12px !important; }
+  .experience-item {
+    display: grid !important; grid-template-columns: 1fr !important;
+    gap: 15px !important; padding: 21px !important; margin: 0 !important;
+  }
+  .exp-date { font-size: 10px !important; line-height: 1.5 !important; opacity: .65; }
+  .exp-role { font-size: 20px !important; line-height: 1.25 !important; }
+  .exp-stack { font-size: 11px !important; margin-top: 8px !important; }
+  .exp-desc { font-size: 14px !important; line-height: 1.65 !important; margin-top: 12px !important; }
+  .exp-points { display: flex !important; flex-wrap: wrap; gap: 6px !important; margin-top: 13px !important; }
+  .exp-points span { font-size: 10px !important; padding: 6px 8px !important; }
+
+  /* Projects */
+  .featured, .second-project { padding: 20px !important; }
+  .featured-top { display: grid !important; grid-template-columns: 1fr !important; gap: 17px !important; }
+  .project-number {
+    display: inline-flex !important; align-items: center;
+    min-height: 28px; padding: 0 9px; border-radius: 9px;
+    background: rgba(255,255,255,.055); color: #aaa !important;
+    font-size: 9px !important; letter-spacing: .1em !important;
+  }
+  .featured h3, .second-project h3 { font-size: 23px !important; line-height: 1.15 !important; margin-top: 12px !important; }
+  .project-stack { font-size: 10px !important; margin-top: 9px !important; }
+  .case-grid { grid-template-columns: 1fr !important; gap: 12px !important; }
+  .case-block { padding: 16px !important; }
+  .python-list { overflow: hidden; }
+  .python-item {
+    display: grid !important; grid-template-columns: 34px 1fr !important;
+    gap: 12px !important; padding: 17px 16px !important;
+  }
+  .python-item .project-number { grid-row: 1 / span 2; align-self: start; }
+  .python-item h3 { font-size: 17px !important; }
+  .python-item p { font-size: 13px !important; line-height: 1.55 !important; }
+
+  /* Learning */
+  .learning-grid { grid-template-columns: 1fr !important; gap: 10px !important; }
+  .learning-item {
+    min-height: 68px !important; padding: 17px 18px !important;
+    border: 0 !important;
+  }
+  .learning-name { font-size: 15px !important; }
+  .learning-status { font-size: 9px !important; }
+
+  /* Credentials */
+  .credential-grid, .credentials-grid { grid-template-columns: 1fr !important; gap: 14px !important; }
+  .credential-card { width: 100% !important; }
+  .credential-card img { width: 100% !important; height: auto !important; }
+
+  /* Education / contact */
+  .edu { grid-template-columns: 1fr !important; gap: 14px !important; padding: 20px !important; }
+  .contact-links { display: grid !important; grid-template-columns: 1fr !important; gap: 10px !important; }
+  .contact-link { min-height: 64px !important; width: 100% !important; }
+  .contact-icon { width: 42px !important; height: 42px !important; }
+  .contact-link-label { font-size: 15px !important; }
+
+  /* Prevent decorative lines from creating horizontal overflow */
+  .connection, .orbit, .scene-grid { opacity: .55; }
+  .horizontal-rule, .side-line { display: none !important; }
+
+  /* Touch devices do not need hover lift */
+  .project-card:hover, .featured:hover, .second-project:hover, .experience-item:hover,
+  .learning-item:hover, .credential-card:hover, .hero-portrait:hover { transform: none !important; }
+}
+
+@media (max-width: 380px) {
+  .hero { padding-top: 102px !important; }
+  .hero-title { font-size: 36px !important; }
+  .hero-portrait { width: min(78vw, 300px) !important; height: min(78vw, 300px) !important; }
+  .role { font-size: 15px !important; }
+  .hero > .scene { height: 220px !important; min-height: 220px !important; }
+  .section-title { font-size: 27px !important; }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .cursor-glow { display: none !important; }
+  * { -webkit-overflow-scrolling: touch; }
+}
+</style>
+
+<style id="unified-responsive-system">
+/* UNIFIED RESPONSIVE SYSTEM
+   One document, one design system: desktop, tablet and phone adapt fluidly. */
+html { -webkit-text-size-adjust: 100%; }
+body { min-width: 0; }
+img, svg { max-width: 100%; }
+button, a { -webkit-tap-highlight-color: transparent; }
+
+/* Large tablets / small laptops: preserve the desktop composition, but breathe. */
+@media (min-width: 701px) and (max-width: 1180px) {
+  .container {
+    width: min(100% - 48px, 1080px) !important;
+  }
+  .nav-inner { width: min(100% - 48px, 1080px) !important; }
+  .hero {
+    min-height: auto !important;
+    padding-top: 118px !important;
+    padding-bottom: 70px !important;
+  }
+  .hero-title { font-size: clamp(56px, 7.2vw, 84px) !important; }
+  .hero-portrait {
+    width: clamp(300px, 34vw, 390px) !important;
+    height: clamp(300px, 34vw, 390px) !important;
+  }
+  .scene { min-height: 480px !important; }
+  .featured-top { grid-template-columns: minmax(0, 1fr) minmax(240px, .7fr) !important; }
+  .case-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .experience-item { padding: 24px !important; }
+}
+
+/* Touch/tablet widths: remove desktop-only hover assumptions without changing desktop. */
+@media (min-width: 701px) and (max-width: 900px) {
+  .nav-center { gap: 14px !important; }
+  .nav-center a { font-size: 11px !important; }
+  .hero-side-panel { display: none !important; }
+  .hero { text-align: center !important; align-items: center !important; }
+  .hero > div:first-of-type { width: min(100%, 760px) !important; margin-inline: auto !important; }
+  .hero-socials { justify-content: center !important; }
+  .scene { margin-top: 28px !important; }
+}
+
+/* Phones: the same components reflow; nothing is duplicated into a second site. */
+@media (max-width: 700px) {
+  .nav-inner, .container { box-sizing: border-box !important; }
+  .hero-title, .section-title, h1, h2, h3 { overflow-wrap: anywhere; }
+  .hero-title { text-wrap: balance; }
+  .hero-copy, .section-intro, .exp-desc, .case-block p, .learning-item { text-wrap: pretty; }
+  .hero-portrait {
+    aspect-ratio: 1 / 1;
+    max-width: 350px !important;
+    max-height: 350px !important;
+  }
+  .hero-social { touch-action: manipulation; }
+  .btn, .contact-link, .mobile-nav-toggle { touch-action: manipulation; }
+}
+
+/* Very narrow phones: keep the composition premium, not cramped. */
+@media (max-width: 390px) {
+  :root { --mobile-gutter: 14px; }
+  .hero-title { font-size: clamp(33px, 10.8vw, 42px) !important; }
+  .hero-copy { font-size: 14px !important; }
+  .hero-portrait { width: min(84vw, 315px) !important; height: min(84vw, 315px) !important; }
+  .python-item { grid-template-columns: 30px minmax(0,1fr) !important; padding-inline: 13px !important; }
+}
+
+/* Users who prefer less motion get the same layout with calmer effects. */
+@media (prefers-reduced-motion: reduce) {
+  .hero-portrait, .scene, .project-card, .experience-item, .learning-item {
+    transform: none !important;
+  }
+}
 </style>
 </head>
 <body>
@@ -6046,6 +6376,43 @@ document.querySelectorAll("[data-tilt-card]").forEach((card) => {
       card.style.setProperty('--glass-x',x+'px'); card.style.setProperty('--glass-y',y+'px');
     });
   });
+})();
+
+
+/* Mobile navigation: keep the desktop navigation unchanged. */
+(function setupMobileNavigation(){
+  const nav = document.getElementById('navbar');
+  const navInner = nav && nav.querySelector('.nav-inner');
+  const navCenter = nav && nav.querySelector('.nav-center');
+  if(!nav || !navInner || !navCenter) return;
+  const existing = navInner.querySelector('.mobile-nav-toggle');
+  const toggle = existing || document.createElement('button');
+  if(!existing){
+    toggle.className = 'mobile-nav-toggle';
+    toggle.type = 'button';
+    toggle.setAttribute('aria-label','Open navigation');
+    toggle.setAttribute('aria-expanded','false');
+    toggle.textContent = '☰';
+    const right = navInner.querySelector('.nav-right');
+    (right || navInner).appendChild(toggle);
+  }
+  const closeMenu = () => {
+    nav.classList.remove('mobile-open');
+    toggle.setAttribute('aria-expanded','false');
+    toggle.setAttribute('aria-label','Open navigation');
+    toggle.textContent = '☰';
+  };
+  toggle.addEventListener('click', () => {
+    const open = nav.classList.toggle('mobile-open');
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+    toggle.textContent = open ? '×' : '☰';
+  });
+  navCenter.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+  document.addEventListener('click', e => {
+    if(window.innerWidth <= 700 && nav.classList.contains('mobile-open') && !nav.contains(e.target)) closeMenu();
+  });
+  window.addEventListener('resize', () => { if(window.innerWidth > 700) closeMenu(); }, {passive:true});
 })();
 </script></body>
 </html>
